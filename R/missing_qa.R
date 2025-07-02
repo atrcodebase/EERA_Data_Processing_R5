@@ -1,3 +1,92 @@
+# Fixing the URLs 
+
+#Tool1
+for(sheet in names(clean_data.tool1)){
+  clean_data.tool1[[sheet]] <-  concat_url(data = clean_data.tool1[[sheet]],
+                                           tool = "./input/tools/Tool 1.EERA Public School - Headmaster Principle Interview - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
+#Tool1 - KDR
+for(sheet in names(clean_data.tool1_kdr)){
+  clean_data.tool1_kdr[[sheet]] <-  concat_url(data = clean_data.tool1_kdr[[sheet]],
+                                           tool = "./input/tools/Tool 11.EERA Public School - Headmaster Principle Interview KDR- R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
+#Tool2
+for(sheet in names(clean_data.tool2)){
+  clean_data.tool2[[sheet]] <-  concat_url(data = clean_data.tool2[[sheet]],
+                                           tool = "./input/tools/Tool 2.EERA Public School - Light Tool - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
+#Tool3
+for(sheet in names(clean_data.tool3)){
+  clean_data.tool3[[sheet]] <-  concat_url(data = clean_data.tool3[[sheet]],
+                                           tool = "./input/tools/Tool 3.EERA Public School - Student Document & Headcount - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
+#Tool4
+for(sheet in names(clean_data.tool4)){
+  clean_data.tool4[[sheet]] <-  concat_url(data = clean_data.tool4[[sheet]],
+                                           tool = "./input/tools/Tool 4.EERA Public School - Teacher Tool - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
+#Tool5
+for(sheet in names(clean_data.tool5)){
+  clean_data.tool5[[sheet]] <-  concat_url(data = clean_data.tool5[[sheet]],
+                                           tool = "./input/tools/Tool 5.EERA Public School - WASH Observation - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
+#Tool6
+for(sheet in names(clean_data.tool6)){
+  clean_data.tool6[[sheet]] <-  concat_url(data = clean_data.tool6[[sheet]],
+                                           tool = "./input/tools/Tool 6.EERA Public School_CBE - Parent Tool - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
+#Tool7
+for(sheet in names(clean_data.tool7)){
+  clean_data.tool7[[sheet]] <-  concat_url(data = clean_data.tool7[[sheet]],
+                                           tool = "./input/tools/Tool 7.EERA Public School_CBE - Shura Tool - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
+#Tool8
+for(sheet in names(clean_data.tool8)){
+  clean_data.tool8[[sheet]] <-  concat_url(data = clean_data.tool8[[sheet]],
+                                           tool = "./input/tools/Tool 8.EERA CBE - Class Level Tool - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
+#Tool9
+for(sheet in names(clean_data.tool0)){
+  clean_data.tool0[[sheet]] <-  concat_url(data = clean_data.tool0[[sheet]],
+                                           tool = "./input/tools/Tool 0.EERA Public School_CBE - Data Entry Tool - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+#Tool10
+for(sheet in names(clean_data.tool9)){
+  clean_data.tool9[[sheet]] <-  concat_url(data = clean_data.tool9[[sheet]],
+                                           tool = "./input/tools/Tool 9.EERA CBE - IP Level Tool - R5.xlsx",
+                                           server_name = "https://artftpm.surveycto.com")
+}
+
+
 # Checks Audio, Image and translation columns
 log_questions <- function(data, columns, columns_different="", key_col="KEY", suffix, sheet,
                           download_links="https://artftpm.surveycto.com/view/submission-attachment/"){
@@ -250,3 +339,4 @@ missing_qa_log <- rbind(
 
 
 rm(missing_qa_log_img)
+
