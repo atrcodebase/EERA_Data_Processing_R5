@@ -313,7 +313,7 @@ detach("package:dplyr", unload=TRUE)
 library(dplyr)
 
 # Logical inconsistencies ------------------------------------------------- Done
-# source("R/logical_checks.R")
+source("R/logical_checks.R")
 
 
 # remove extra columns  --------------------------------------------------------
