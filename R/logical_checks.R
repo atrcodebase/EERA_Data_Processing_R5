@@ -699,30 +699,6 @@ lc_tool1 <- plyr::rbind.fill(
       KEY,
       Issue
     ),
-    
-  clean_data.tool1$data %>% 
-    filter((
-      (C2 %in% c("The school has a deputy teaching manager and headmaster(s) but not a principal", "The school has only headmaster(s)")) |
-        ((C2 %in% c("The school has a principal, deputy teaching manager, and headmaster(s)", "The school has a principal and headmaster(s) but not a deputy teaching manager") & 
-            C4_1 %in% c("The school principal is not present today and I am officially acting principal in his/her absence",
-                        "The school principal does not want to participate in interview, and I am officially delegated to participate in the interviews in his/her absence")))) &
-        L1A3 %in% c("Questions in this section were responded by the principal", "Support respondents responded to questions in this section in the presence of the principal")) %>% 
-    mutate(
-      Issue = "The school does not have a principal/the principal was absent or did not want to attend the interview, but in L1A3 it is reported that the principal was the respondent for the section or he was present at the time of interview.",
-      Question = "C2 _ C4_1",
-      Old_value = paste0(C2, "_", C4_1),
-      Related_question = "L1A3",
-      Related_value = L1A3
-    ) |> 
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
   
   clean_data.tool1$data %>% 
     filter((
@@ -885,7 +861,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -904,7 +880,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -923,7 +899,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -942,7 +918,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -961,7 +937,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -980,7 +956,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -999,7 +975,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1018,7 +994,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1037,7 +1013,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1056,7 +1032,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1075,7 +1051,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1094,7 +1070,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1114,7 +1090,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1133,7 +1109,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1153,7 +1129,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = as.character(janitor::convert_to_date(data_collection_start_date_ps))
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1173,7 +1149,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1182,287 +1158,297 @@ lc_tool2 <- plyr::rbind.fill(
       Issue
     ),
   
-  # flagging if the school name is confirmed in tool1 but not confirmed here or vice versa
-  clean_data.tool2$data |>
-    distinct(Site_Visit_ID, .keep_all = T) |> 
-    left_join(
-      clean_data.tool1$data |>
-        select(A27.tool1 = A27, Site_Visit_ID),
-      by = "Site_Visit_ID"
-    ) |> 
-    filter(B1 != A27.tool1) |> 
-    mutate(
-      Issue = "The school name is confirmed in tool1 but not confirmed tool 2 or vice versa!",
-      Question = "B1",
-      Old_value = B1,
-      Related_question = "A27.tool1",
-      Related_value = A27.tool1
-    ) |> 
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # flagging if the school name is confirmed in tool1 but not confirmed here or vice versa 
+  # B1 has been removed from tool2
+  # clean_data.tool2$data |>
+  #   distinct(Site_Visit_ID, .keep_all = T) |> 
+  #   left_join(
+  #     clean_data.tool1$data |>
+  #       select(A27.tool1 = A27, Site_Visit_ID),
+  #     by = "Site_Visit_ID"
+  #   ) |> 
+  #   filter(B1 != A27.tool1) |> 
+  #   mutate(
+  #     Issue = "The school name is confirmed in tool1 but not confirmed tool 2 or vice versa!",
+  #     Question = "B1",
+  #     Old_value = B1,
+  #     Related_question = "A27.tool1",
+  #     Related_value = A27.tool1
+  #   ) |> 
+  #   select(
+  #     all_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
   
   # flagging if the answer to conversion of school to a Islamic school is inconsistent across tool 1 and tool 2
-  clean_data.tool2$data |>
-    distinct(Site_Visit_ID, .keep_all = T) |> 
-    left_join(
-      clean_data.tool1$data |>
-        select(A30.tool1 = A30, Site_Visit_ID),
-      by = "Site_Visit_ID"
-    ) |> 
-    filter(B3 != A30.tool1) |> 
-    mutate(
-      Issue = "The answer to conversion of school to an Islamic school is inconsistent across tool 1 and tool 2!",
-      Question = "B3",
-      Old_value = B3,
-      Related_question = "A30.tool1",
-      Related_value = A30.tool1
-    ) |> 
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # B3 has been removed from tool2
+  # clean_data.tool2$data |>
+  #   distinct(Site_Visit_ID, .keep_all = T) |> 
+  #   left_join(
+  #     clean_data.tool1$data |>
+  #       select(A30.tool1 = A30, Site_Visit_ID),
+  #     by = "Site_Visit_ID"
+  #   ) |> 
+  #   filter(B3 != A30.tool1) |> 
+  #   mutate(
+  #     Issue = "The answer to conversion of school to an Islamic school is inconsistent across tool 1 and tool 2!",
+  #     Question = "B3",
+  #     Old_value = B3,
+  #     Related_question = "A30.tool1",
+  #     Related_value = A30.tool1
+  #   ) |> 
+  #   select(
+  #     all_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
   
   # flagging if the answer to question related to open/closed status of school is inconsistent across tool 1 and tool 2
-  clean_data.tool2$data |>
-    distinct(Site_Visit_ID, .keep_all = T) |> 
-    left_join(
-      clean_data.tool1$data |>
-        select(A34.tool1 = A34, Site_Visit_ID),
-      by = "Site_Visit_ID"
-    ) |> 
-    mutate(
-      B7 = str_trim(B7),
-      A34.tool1 = str_trim(A34.tool1)
-    ) |>
-    filter(
-      (B7 == "Yes, school is open, teachers and students (both male and female) are inside" & A34.tool1 != "Yes, school is open, and teachers and students (both male and female) are inside") |
-        (B7 == "Yes, it is open and there are students (only male) and teachers inside" & A34.tool1 != "Yes, it is open and there are students (only male) and teachers inside") |
-        (B7 == "Yes, it is open and there are students (only female) and teachers inside" & A34.tool1 != "Yes, it is open and there are students (only female) and teachers inside")|
-        (B7 == "Yes, school is open and there are only teachers and no students inside" & A34.tool1 != "Yes, school is open and there are only teachers and no students inside")|
-        (B7 == "Yes, school is open, but there are no admin/academic staff members, teachers, or students inside" & A34.tool1 != "Yes, school is open, but there are no admin/academic staff members, teachers, or students inside")|
-        (B7 == "No, school is closed and there is no one inside" & A34.tool1 != "No, school is closed and there is no one inside")
-    ) |> 
-    mutate(
-      Issue = "The answer to question related to open/closed status of school is inconsistent across tool 1 and tool 2!",
-      Question = "B7",
-      Old_value = B7,
-      Related_question = "A34.tool1",
-      Related_value = A34.tool1
-    ) |> 
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # B7 has been removed from tool2
+  # clean_data.tool2$data |>
+  #   distinct(Site_Visit_ID, .keep_all = T) |> 
+  #   left_join(
+  #     clean_data.tool1$data |>
+  #       select(A34.tool1 = A34, Site_Visit_ID),
+  #     by = "Site_Visit_ID"
+  #   ) |> 
+  #   mutate(
+  #     B7 = str_trim(B7),
+  #     A34.tool1 = str_trim(A34.tool1)
+  #   ) |>
+  #   filter(
+  #     (B7 == "Yes, school is open, teachers and students (both male and female) are inside" & A34.tool1 != "Yes, school is open, and teachers and students (both male and female) are inside") |
+  #       (B7 == "Yes, it is open and there are students (only male) and teachers inside" & A34.tool1 != "Yes, it is open and there are students (only male) and teachers inside") |
+  #       (B7 == "Yes, it is open and there are students (only female) and teachers inside" & A34.tool1 != "Yes, it is open and there are students (only female) and teachers inside")|
+  #       (B7 == "Yes, school is open and there are only teachers and no students inside" & A34.tool1 != "Yes, school is open and there are only teachers and no students inside")|
+  #       (B7 == "Yes, school is open, but there are no admin/academic staff members, teachers, or students inside" & A34.tool1 != "Yes, school is open, but there are no admin/academic staff members, teachers, or students inside")|
+  #       (B7 == "No, school is closed and there is no one inside" & A34.tool1 != "No, school is closed and there is no one inside")
+  #   ) |> 
+  #   mutate(
+  #     Issue = "The answer to question related to open/closed status of school is inconsistent across tool 1 and tool 2!",
+  #     Question = "B7",
+  #     Old_value = B7,
+  #     Related_question = "A34.tool1",
+  #     Related_value = A34.tool1
+  #   ) |> 
+  #   select(
+  #     all_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
   
   # flagging if the answer to 'When did the school close?' is inconsistent across tool 1 and tool 2
-  clean_data.tool2$data |>
-    distinct(Site_Visit_ID, .keep_all = T) |> 
-    left_join(
-      clean_data.tool1$data |>
-        select(B8.tool1 = B8, Site_Visit_ID),
-      by = "Site_Visit_ID"
-    ) |> 
-    filter(C10 != B8.tool1) |> 
-    mutate(
-      Issue = "The answer to 'When did the school close?' is inconsistent across tool 1 and tool 2!",
-      Question = "C10",
-      Old_value = C10,
-      Related_question = "B8.tool1",
-      Related_value = B8.tool1
-    ) |> 
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # C10 has been removed from tool2
+  # clean_data.tool2$data |>
+  #   distinct(Site_Visit_ID, .keep_all = T) |> 
+  #   left_join(
+  #     clean_data.tool1$data |>
+  #       select(B8.tool1 = B8, Site_Visit_ID),
+  #     by = "Site_Visit_ID"
+  #   ) |> 
+  #   filter(C10 != B8.tool1) |> 
+  #   mutate(
+  #     Issue = "The answer to 'When did the school close?' is inconsistent across tool 1 and tool 2!",
+  #     Question = "C10",
+  #     Old_value = C10,
+  #     Related_question = "B8.tool1",
+  #     Related_value = B8.tool1
+  #   ) |> 
+  #   select(
+  #     all_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
   
   # flagging if the answer to 'Where are male children and adults going for schooling since the school was closed?' is inconsistent across tool 1 and tool 2
-  clean_data.tool2$data |>
-    distinct(Site_Visit_ID, .keep_all = T) |>
-    left_join(
-      clean_data.tool1$data |>
-        select(starts_with("B9"), Site_Visit_ID),
-      by = "Site_Visit_ID"
-    ) |>
-    filter(C11_998 != 1) |>
-    filter(
-      C11_1 != B9_1 |
-        C11_2 != B9_2 |
-        C11_3 != B9_3 |
-        C11_4 != B9_4 |
-        C11_5 != B9_5 |
-        C11_6 != B9_6
-    ) |>
-    mutate(
-      Issue = "The answer to this question is inconsistent across tool 1 and tool 2!",
-      Question = "C11",
-      Old_value = C11,
-      Related_question = "B9",
-      Related_value = B9
-    ) |>
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # C11 has been removed from tool2
+  # clean_data.tool2$data |>
+  #   distinct(Site_Visit_ID, .keep_all = T) |>
+  #   left_join(
+  #     clean_data.tool1$data |>
+  #       select(starts_with("B9"), Site_Visit_ID),
+  #     by = "Site_Visit_ID"
+  #   ) |>
+  #   filter(C11_998 != 1) |>
+  #   filter(
+  #     C11_1 != B9_1 |
+  #       C11_2 != B9_2 |
+  #       C11_3 != B9_3 |
+  #       C11_4 != B9_4 |
+  #       C11_5 != B9_5 |
+  #       C11_6 != B9_6
+  #   ) |>
+  #   mutate(
+  #     Issue = "The answer to this question is inconsistent across tool 1 and tool 2!",
+  #     Question = "C11",
+  #     Old_value = C11,
+  #     Related_question = "B9",
+  #     Related_value = B9
+  #   ) |>
+  #   select(
+  #     all_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
   
   # flagging if the answer to 'Where are female children and adults going for schooling since the school was closed?' is inconsistent across tool 1 and tool 2
-  clean_data.tool2$data |>
-    distinct(Site_Visit_ID, .keep_all = T) |>
-    left_join(
-      clean_data.tool1$data |>
-        select(starts_with("B10"), Site_Visit_ID),
-      by = "Site_Visit_ID"
-    ) |>
-    filter(C12_998 != 1) |>
-    filter(
-      C12_1 != B10_1 |
-        C12_2 != B10_2 |
-        C12_3 != B10_3 |
-        C12_4 != B10_4 |
-        C12_5 != B10_5 |
-        C12_6 != B10_6
-    ) |>
-    mutate(
-      Issue = "The answer to this question is inconsistent across tool 1 and tool 2!",
-      Question = "C12",
-      Old_value = C12,
-      Related_question = "B10",
-      Related_value = B10
-    ) |>
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # C12 has been removed from tool2
+  # clean_data.tool2$data |>
+  #   distinct(Site_Visit_ID, .keep_all = T) |>
+  #   left_join(
+  #     clean_data.tool1$data |>
+  #       select(starts_with("B10"), Site_Visit_ID),
+  #     by = "Site_Visit_ID"
+  #   ) |>
+  #   filter(C12_998 != 1) |>
+  #   filter(
+  #     C12_1 != B10_1 |
+  #       C12_2 != B10_2 |
+  #       C12_3 != B10_3 |
+  #       C12_4 != B10_4 |
+  #       C12_5 != B10_5 |
+  #       C12_6 != B10_6
+  #   ) |>
+  #   mutate(
+  #     Issue = "The answer to this question is inconsistent across tool 1 and tool 2!",
+  #     Question = "C12",
+  #     Old_value = C12,
+  #     Related_question = "B10",
+  #     Related_value = B10
+  #   ) |>
+  #   select(
+  #     all_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
   
   # Flagging if shift types differs between tool 2 and tool 1
-  clean_data.tool2$data |>
-    left_join(
-      clean_data.tool1$data |> select( Site_Visit_ID, C1.tool1 = C1),  by = "Site_Visit_ID") |>
-    filter(D1 != C1.tool1) |>
-    mutate(
-      Issue = "The shift types differs between tool 2 and tool 1!",
-      Question = "D1",
-      Old_value = D1,
-      Related_question ="C1 (Tool 1)",
-      Related_value = C1.tool1
-    ) |>
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # D1 has been removed from tool2
+  # clean_data.tool2$data |>
+  #   left_join(
+  #     clean_data.tool1$data |> select( Site_Visit_ID, C1.tool1 = C1),  by = "Site_Visit_ID") |>
+  #   filter(D1 != C1.tool1) |>
+  #   mutate(
+  #     Issue = "The shift types differs between tool 2 and tool 1!",
+  #     Question = "D1",
+  #     Old_value = D1,
+  #     Related_question ="C1 (Tool 1)",
+  #     Related_value = C1.tool1
+  #   ) |>
+  #   select(
+  #     all_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
   
   # Flagging if The Head staff of school reported different between tool 2 and tool 1
-  clean_data.tool2$data |>
-    distinct(Site_Visit_ID, .keep_all = T) |>
-    left_join(
-      clean_data.tool1$data |>
-        select(C2.tool1 = C2, Site_Visit_ID),
-      by = "Site_Visit_ID"
-    ) |>
-    filter(!is.na(C2.tool1) & (D2 != "Other" & C2.tool1 != "Other") & D2 != C2.tool1) |>
-    mutate(
-      Issue = "The Head staff of school reported different between tool 2 and tool 1",
-      Question = "D2",
-      Old_value = D2,
-      Related_question = "C2(Tool 1)",
-      Related_value = C2.tool1
-    ) |>
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # D2 has been removed from tool2
+  # clean_data.tool2$data |>
+  #   distinct(Site_Visit_ID, .keep_all = T) |>
+  #   left_join(
+  #     clean_data.tool1$data |>
+  #       select(C2.tool1 = C2, Site_Visit_ID),
+  #     by = "Site_Visit_ID"
+  #   ) |>
+  #   filter(!is.na(C2.tool1) & (D2 != "Other" & C2.tool1 != "Other") & D2 != C2.tool1) |>
+  #   mutate(
+  #     Issue = "The Head staff of school reported different between tool 2 and tool 1",
+  #     Question = "D2",
+  #     Old_value = D2,
+  #     Related_question = "C2(Tool 1)",
+  #     Related_value = C2.tool1
+  #   ) |>
+  #   select(
+  #     all_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
 
   # 24 -  Flagging if the school shift in question D1 is reported Single but later in shift details and shift details others reported more than one shift # HERE
-  clean_data.tool2$data |>
-    left_join(
-      clean_data.tool2$Shifts_Detail |> select(Site_Visit_ID,Shift_name) |> # Removed  |> filter(!is.na(Shift_name))
-        group_by(Site_Visit_ID) |>
-        summarise(
-          shift_count = n()
-        ), by = "Site_Visit_ID") |>
-    filter(D1 == "Single" & (shift_count != 1)) |>
-    mutate(
-      Issue = "The school shift in question D1 is reported Single but later in shift details reported more than one shift",
-      Question = "D1",
-      Old_value = D1,
-      Related_question = "shift_count (Calculated form Shifts_Detail)",
-      Related_value = shift_count
-    ) |>
-    select(
-      # all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # D1 has been removed from tool2
+  # clean_data.tool2$data |>
+  #   left_join(
+  #     clean_data.tool2$Shifts_Detail |> select(Site_Visit_ID,Shift_name) |> # Removed  |> filter(!is.na(Shift_name))
+  #       group_by(Site_Visit_ID) |>
+  #       summarise(
+  #         shift_count = n()
+  #       ), by = "Site_Visit_ID") |>
+  #   filter(D1 == "Single" & (shift_count != 1)) |>
+  #   mutate(
+  #     Issue = "The school shift in question D1 is reported Single but later in shift details reported more than one shift",
+  #     Question = "D1",
+  #     Old_value = D1,
+  #     Related_question = "shift_count (Calculated form Shifts_Detail)",
+  #     Related_value = shift_count
+  #   ) |>
+  #   select(
+  #     any_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
   
-  clean_data.tool2$data |>
-    left_join(
-      clean_data.tool2$Shifts_Detail |> select(Site_Visit_ID,Shift_name) |> # Removed  |> filter(!is.na(Shift_name))
-        group_by(Site_Visit_ID) |>
-        summarise(
-          shift_count = n()
-        ), by = "Site_Visit_ID") |>
-    filter(D1 == "Multiple" & (shift_count == 1 | is.na(shift_count))) |>
-    mutate(
-      Issue = "The school shift in question D1 is reported Multiple but later in shift details reported only one shift",
-      Question = "D1",
-      Old_value = D1,
-      Related_question = "shift_count (Calculated form Shifts_Detail)",
-      Related_value = shift_count
-    ) |>
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
+  # D1 has been removed form tool2
+  # clean_data.tool2$data |>
+  #   left_join(
+  #     clean_data.tool2$Shifts_Detail |> select(Site_Visit_ID,Shift_name) |> # Removed  |> filter(!is.na(Shift_name))
+  #       group_by(Site_Visit_ID) |>
+  #       summarise(
+  #         shift_count = n()
+  #       ), by = "Site_Visit_ID") |>
+  #   filter(D1 == "Multiple" & (shift_count == 1 | is.na(shift_count))) |>
+  #   mutate(
+  #     Issue = "The school shift in question D1 is reported Multiple but later in shift details reported only one shift",
+  #     Question = "D1",
+  #     Old_value = D1,
+  #     Related_question = "shift_count (Calculated form Shifts_Detail)",
+  #     Related_value = shift_count
+  #   ) |>
+  #   select(
+  #     all_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
   
   # 26 - Flagging  if The school type does not match with grades reported in school Operationality and Operationality Other sheets
   clean_data.tool2$School_Operationality |>
@@ -1496,7 +1482,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = School_type_compare
     ) |>
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1516,7 +1502,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = N_Male_Teachers
     ) |>
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1536,7 +1522,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = N_Female_Teachers
     ) |>
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1544,82 +1530,21 @@ lc_tool2 <- plyr::rbind.fill(
       KEY,
       Issue
     ),
-  # Removed for CBE DC
-  # clean_data.tool2$data |>
-  #   filter(D1 == "Single" & C15A > 1) |>
-  #   mutate(
-  #     Issue = "Can you please confirm the number of headmasters in this school (More than 1 headmasters for single shift) - This flag is only for school with Single shift",
-  #     Question = "C15A",
-  #     Old_value = C15A,
-  #     Related_question = "D1",
-  #     Related_value = D1
-  #   ) |>
-  #   select(
-  #     all_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
-  
-  # Headmasters # Removed for CBE DC
-  # clean_data.tool2$data |>
-  #   filter(D1 == "Multiple" & C15A == 1) |>
-  #   mutate(
-  #     Issue = "Can you please confirm the number of headmasters in this school (One headmaster for multiple shifts) - This flag is only for school with Multiple shift",
-  #     Question = "C15A",
-  #     Old_value = C15A,
-  #     Related_question = "D1",
-  #     Related_value = D1
-  #   ) |>
-  #   select(
-  #     all_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
-  
-  # This check will automatically solve the C2 question in tool 1 if the D2 and C2 are equally same across both tools 
-  # Removed for CBE DC
-  # clean_data.tool2$data |>
-  #   filter(D2 %in% c("The school has a deputy teaching manager and headmaster(s) but not a principal",
-  #                    "The school has a principal and headmaster(s) but not a deputy teaching manager",
-  #                    "The school has a principal, deputy teaching manager, and headmaster(s)",
-  #                    "The school has only headmaster(s)") & C15A == 0) |>
-  #   mutate(
-  #     Issue = "In question D2 it is reported that school has headmaster but the number of headmaster/s for this school is reported 0 in question C15A",
-  #     Question = "C15A",
-  #     Old_value = C15A,
-  #     Related_question = "D2",
-  #     Related_value = D2
-  #   ) |>
-  #   select(
-  #     all_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
   
   # New for R4
-  clean_data.tool2$data %>%
+  clean_data.tool1$data %>% 
+    select(School_Gender_SV, EMIS_School_ID_CBE_KEY) %>% 
+    left_join(clean_data.tool2$data, by = "EMIS_School_ID_CBE_KEY") %>% 
     filter(School_Gender_SV %in% c("Female", "Mixed") & E3_5 == 1) %>%
     mutate(
       Issue = "The SV Gender of school is reported Female or Mixed, but in question E3 it is reported 'due to school transformation from female to male, more male teachers were hired",
       Question = "E3",
       Old_value = E3,
-      Related_question = "School_Gender_SV",
+      Related_question = "School_Gender_SV (from tool 1)",
       Related_value = School_Gender_SV
     ) |>
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1628,17 +1553,19 @@ lc_tool2 <- plyr::rbind.fill(
       Issue
     ),
 
-  clean_data.tool2$data %>%
+  clean_data.tool1$data %>% 
+    select(School_Gender_SV, EMIS_School_ID_CBE_KEY) %>% 
+    left_join(clean_data.tool2$data, by = "EMIS_School_ID_CBE_KEY") %>% 
     filter(School_Gender_SV %in% c("male", "Mixed") & E7_5 == 1) %>%
     mutate(
       Issue = "The SV Gender of school is reported male or Mixed, but in question E7 it is reported 'due to school transformation from male to female, more female teachers were hired",
       Question = "E7",
       Old_value = E7,
-      Related_question = "School_Gender_SV",
+      Related_question = "School_Gender_SV (from tool 1)",
       Related_value = School_Gender_SV
     ) |>
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1647,17 +1574,17 @@ lc_tool2 <- plyr::rbind.fill(
       Issue
     ),
 
-  clean_data.tool2$data %>%
+  clean_data.tool2$data %>% 
     filter(School_Type_SV == "Primary" & E3_6 == 1) %>%
     mutate(
       Issue = "The SV Type of school is reported Primary, while in question E3 it is reported 'due to school promotion from primary to Secondary, more teachers were hired",
       Question = "E3",
       Old_value = E3,
-      Related_question = "School_Type_SV",
+      Related_question = "School_Type_SV (from tool 1)",
       Related_value = School_Type_SV
     ) |>
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1676,79 +1603,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = School_Type_SV
     ) |>
     select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  clean_data.tool2$data %>% 
-    filter((
-      (D2 %in% c("The school has a deputy teaching manager and headmaster(s) but not a principal", "The school has only headmaster(s)")) |
-        ((D2 %in% c("The school has a principal, deputy teaching manager, and headmaster(s)", "The school has a principal and headmaster(s) but not a deputy teaching manager") & 
-            D4_1 %in% c("The school principal is not present today and I am officially acting principal in his/her absence",
-                        "The school principal does not want to participate in interview, and I am officially delegated to participate in the interviews in his/her absence")))) &
-        L1 %in% c("Questions in this section were responded by the principal", "Support respondents responded to questions in this section in the presence of the principal")) %>% 
-    mutate(
-      Issue = "The school does not have a principal/the principal was absent or did not want to attend the interview, but in L1 it is reported that the principal was the respondent for the section or he was present at the time of interview.",
-      Question = "D2 _ D4_1",
-      Old_value = paste0(D2, "_", D4_1),
-      Related_question = "L1",
-      Related_value = L1
-    ) |> 
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  clean_data.tool2$data %>% 
-    filter((
-      (D2 %in% c("The school has a deputy teaching manager and headmaster(s) but not a principal", "The school has only headmaster(s)")) |
-        ((D2 %in% c("The school has a principal, deputy teaching manager, and headmaster(s)", "The school has a principal and headmaster(s) but not a deputy teaching manager") & 
-            D4_1 %in% c("The school principal is not present today and I am officially acting principal in his/her absence",
-                        "The school principal does not want to participate in interview, and I am officially delegated to participate in the interviews in his/her absence")))) &
-        L1A1 %in% c("Questions in this section were responded by the principal", "Support respondents responded to questions in this section in the presence of the principal")) %>% 
-    mutate(
-      Issue = "The school does not have a principal/the principal was absent or did not want to attend the interview, but in L1A1 it is reported that the principal was the respondent for the section or he was present at the time of interview.",
-      Question = "D2 _ D4_1",
-      Old_value = paste0(D2, "_", D4_1),
-      Related_question = "L1A1",
-      Related_value = L1A1
-    ) |> 
-    select(
-      all_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  clean_data.tool2$data %>% 
-    filter((
-      (D2 %in% c("The school has a deputy teaching manager and headmaster(s) but not a principal", "The school has only headmaster(s)")) |
-        ((D2 %in% c("The school has a principal, deputy teaching manager, and headmaster(s)", "The school has a principal and headmaster(s) but not a deputy teaching manager") & 
-            D4_1 %in% c("The school principal is not present today and I am officially acting principal in his/her absence",
-                        "The school principal does not want to participate in interview, and I am officially delegated to participate in the interviews in his/her absence")))) &
-        L1A2 %in% c("Questions in this section were responded by the principal", "Support respondents responded to questions in this section in the presence of the principal")) %>% 
-    mutate(
-      Issue = "The school does not have a principal/the principal was absent or did not want to attend the interview, but in L1A2 it is reported that the principal was the respondent for the section or he was present at the time of interview.",
-      Question = "D2 _ D4_1",
-      Old_value = paste0(D2, "_", D4_1),
-      Related_question = "L1A2",
-      Related_value = L1A2
-    ) |> 
-    select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1759,19 +1614,77 @@ lc_tool2 <- plyr::rbind.fill(
   
   clean_data.tool2$data %>% 
     left_join(
-      clean_data.tool1$data %>% select(EMIS_School_ID_CBE_KEY, School_Gender_SV.tool1 = School_Gender_SV) %>% filter(!is.na(School_Gender_SV.tool1)), by = "EMIS_School_ID_CBE_KEY"
+      clean_data.tool1$data %>% select(C2_tool1 = C2, EMIS_School_ID_CBE_KEY), by = "EMIS_School_ID_CBE_KEY"
     ) %>% 
-    filter(!is.na(School_Gender_SV.tool1)) %>% 
-    filter(School_Gender_SV != School_Gender_SV.tool1) %>% 
+    filter((
+      (C2_tool1 %in% c("The school has a deputy teaching manager and headmaster(s) but not a principal", "The school has only headmaster(s)")) |
+        ((C2_tool1 %in% c("The school has a principal, deputy teaching manager, and headmaster(s)", "The school has a principal and headmaster(s) but not a deputy teaching manager") & 
+            D4_1 %in% c("The school principal is not present today and I am officially acting principal in his/her absence",
+                        "The school principal does not want to participate in interview, and I am officially delegated to participate in the interviews in his/her absence")))) &
+        L1 %in% c("Questions in this section were responded by the principal", "Support respondents responded to questions in this section in the presence of the principal")) %>% 
     mutate(
-      Issue = "The school gender SV is different for the same school across tool 2 and tool 1.",
-      Question = "School_Gender_SV",
-      Old_value = School_Gender_SV,
-      Related_question = "School_Gender_SV.tool1",
-      Related_value = School_Gender_SV.tool1
+      Issue = "The school does not have a principal/the principal was absent or did not want to attend the interview, but in L1 it is reported that the principal was the respondent for the section or he was present at the time of interview.",
+      Question = "C2 (From tool 1) _ D4_1",
+      Old_value = paste0(C2_tool1, "_", D4_1),
+      Related_question = "L1",
+      Related_value = L1
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  clean_data.tool2$data %>% 
+    left_join(
+      clean_data.tool1$data %>% select(C2_tool1 = C2, EMIS_School_ID_CBE_KEY), by = "EMIS_School_ID_CBE_KEY"
+    ) %>% 
+    filter((
+      (C2_tool1 %in% c("The school has a deputy teaching manager and headmaster(s) but not a principal", "The school has only headmaster(s)")) |
+        ((C2_tool1 %in% c("The school has a principal, deputy teaching manager, and headmaster(s)", "The school has a principal and headmaster(s) but not a deputy teaching manager") & 
+            D4_1 %in% c("The school principal is not present today and I am officially acting principal in his/her absence",
+                        "The school principal does not want to participate in interview, and I am officially delegated to participate in the interviews in his/her absence")))) &
+        L1A1 %in% c("Questions in this section were responded by the principal", "Support respondents responded to questions in this section in the presence of the principal")) %>% 
+    mutate(
+      Issue = "The school does not have a principal/the principal was absent or did not want to attend the interview, but in L1A1 it is reported that the principal was the respondent for the section or he was present at the time of interview.",
+      Question = "C2 (From tool 1) _ D4_1",
+      Old_value = paste0(C2_tool1, "_", D4_1),
+      Related_question = "L1A1",
+      Related_value = L1A1
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  clean_data.tool2$data %>% 
+    left_join(
+      clean_data.tool1$data %>% select(C2_tool1 = C2, EMIS_School_ID_CBE_KEY), by = "EMIS_School_ID_CBE_KEY"
+    ) %>% 
+    filter((
+      (C2_tool1 %in% c("The school has a deputy teaching manager and headmaster(s) but not a principal", "The school has only headmaster(s)")) |
+        ((C2_tool1 %in% c("The school has a principal, deputy teaching manager, and headmaster(s)", "The school has a principal and headmaster(s) but not a deputy teaching manager") & 
+            D4_1 %in% c("The school principal is not present today and I am officially acting principal in his/her absence",
+                        "The school principal does not want to participate in interview, and I am officially delegated to participate in the interviews in his/her absence")))) &
+        L1A2 %in% c("Questions in this section were responded by the principal", "Support respondents responded to questions in this section in the presence of the principal")) %>% 
+    mutate(
+      Issue = "The school does not have a principal/the principal was absent or did not want to attend the interview, but in L1A2 it is reported that the principal was the respondent for the section or he was present at the time of interview.",
+      Question = "C2 (From tool 1) _ D4_1",
+      Old_value = paste0(C2_tool1, "_", D4_1),
+      Related_question = "L1A2",
+      Related_value = L1A2
+    ) |> 
+    select(
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1794,7 +1707,7 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value = School_Type_SV.tool1
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1820,7 +1733,7 @@ lc_tool2.school_operationality <- plyr::rbind.fill(
       Related_value = ""
     ) |>
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1842,7 +1755,7 @@ lc_tool2.school_operationality <- plyr::rbind.fill(
       Related_value = ""
     ) |>
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1865,7 +1778,7 @@ lc_tool2.shift <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1888,7 +1801,7 @@ lc_tool2.shift <- plyr::rbind.fill(
       Related_value = ""
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1923,7 +1836,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1942,7 +1855,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1961,7 +1874,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1980,7 +1893,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -1999,7 +1912,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2018,7 +1931,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2037,7 +1950,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2056,7 +1969,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2075,7 +1988,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2094,7 +2007,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2113,7 +2026,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2132,7 +2045,7 @@ lc_tool2.shift_operationality_and_other <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2184,7 +2097,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2204,7 +2117,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2224,7 +2137,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2244,7 +2157,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2264,7 +2177,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2284,7 +2197,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2304,7 +2217,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2324,7 +2237,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2344,7 +2257,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2364,7 +2277,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2384,7 +2297,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2404,7 +2317,7 @@ operational_grades_not_reported_in_shifts_log <- plyr::rbind.fill(
       Related_value = is_operational
     ) |> 
     select(
-      all_of(meta_cols),
+      any_of(meta_cols),
       Question,
       Old_value,
       Related_question,
@@ -2450,7 +2363,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2469,7 +2382,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2488,7 +2401,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2507,7 +2420,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2526,7 +2439,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2545,7 +2458,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2564,7 +2477,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2583,7 +2496,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2602,7 +2515,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2621,7 +2534,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2640,7 +2553,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2659,7 +2572,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = is_operational
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2680,7 +2593,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2700,7 +2613,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2719,7 +2632,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2738,7 +2651,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2757,7 +2670,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2776,7 +2689,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2795,7 +2708,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2814,7 +2727,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2833,7 +2746,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2852,7 +2765,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2871,7 +2784,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2890,7 +2803,7 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
         Related_value = ""
       ) |> 
       select(
-        all_of(meta_cols),
+        any_of(meta_cols),
         Question,
         Old_value,
         Related_question,
@@ -2900,9 +2813,6 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
       )
     
 ) |> mutate(tool = "Tool 2 - Light", sheet = "Headmasters", Old_value = as.character(Old_value))
-
-
-
 
 
 # Logging issues in Tool 3 ------------------------------------------------
@@ -3370,6 +3280,7 @@ lc_tool3 <- plyr::rbind.fill(
     ),
   
   clean_data.tool3$Tool3_Grades_Repeat |>
+    mutate(EMIS_School_ID_CBE_KEY = as.character(EMIS_School_ID_CBE_KEY)) %>% 
     bind_rows(clean_data.tool0$Tool3_Grades_Repeat %>% 
                 mutate(
                   EMIS_School_ID_CBE_KEY = as.character(EMIS_School_ID_CBE_KEY),
@@ -3412,22 +3323,21 @@ lc_tool3 <- plyr::rbind.fill(
     arrange(EMIS_School_ID_CBE_KEY, Old_value),
   
   # NEW: ARTF comments
-  # Flagging if headcounts do not match with Data Entry Tool
-  # Removed for CBE DC
-  # dd <- clean_data.tool3$Student_Headcount |>
+  # Flagging if headcounts do not match with Data Entry Tool ---- RUn it after class names are cleaned in tool 3
+  # clean_data.tool3$Student_Headcount |>
   #   mutate(key_join = paste0(EMIS_School_ID_CBE_KEY, E1_Field_Label)) |>
   #   left_join(clean_data.tool0$Tool3_T2_Classes_VD |> mutate( key_join = paste0(EMIS_School_ID_CBE_KEY, Tool3_Class_Name_VD)) |>
   #               select(Tool3_Headcount_Conducted_Class, Tool3_Headcount_Male, Tool3_Headcount_Female, Tool3_Class_Name_VD, key_join),
-  #             by = "key_join") |> 
+  #             by = "key_join") |>
   # filter(is.na(Tool3_Headcount_Male) | is.na(Tool3_Headcount_Female)) |>
   #   mutate(
   #     Issue = "The school/class is missing in Data Entry VD sheet",
   #     Question = "E3A1",
   #     Old_value = E3A1,
   #     Related_question = "Tool3_Headcount_Male + Tool3_Headcount_Female (Data Entry)",
-  #     Related_value = paste0(Tool3_Headcount_Male, " + ", Tool3_Headcount_Female), 
+  #     Related_value = paste0(Tool3_Headcount_Male, " + ", Tool3_Headcount_Female),
   #     sheet = "Student_Headcount"
-  #   ) |> 
+  #   ) |>
   #   select(
   #     any_of(meta_cols),
   #     Question,
@@ -3838,24 +3748,24 @@ lc_tool4 <- plyr::rbind.fill(
     ),
   
   # Removed for CBE DC
-  # clean_data.tool4$data |>
-  #   filter(G4_Minutes >= 120) |>
-  #   mutate(
-  #     Issue = "Please confirm the duration it takes to get to school!",
-  #     Question = "G4_Minutes",
-  #     Old_value = G4_Minutes,
-  #     Related_question = "",
-  #     Related_value = ""
-  #   ) |>
-  #   select(
-  #     any_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
+  clean_data.tool4$data |>
+    filter(G4_Minutes >= 120) |>
+    mutate(
+      Issue = "Please confirm the duration it takes to get to school!",
+      Question = "G4_Minutes",
+      Old_value = G4_Minutes,
+      Related_question = "",
+      Related_value = ""
+    ) |>
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
   
   clean_data.tool4$data |>
     filter(F2_N >= 6) |>
@@ -3879,30 +3789,30 @@ lc_tool4 <- plyr::rbind.fill(
   mutate(tool = "Tool 4 - Teacher", sheet = "data", Old_value = as.character(Old_value))
 
 # Removed for CBE DC
-# lc_tool4.add_subj <- plyr::rbind.fill(
-#   clean_data.tool4$Additional_Subjects |>
-#     mutate(
-#       key_for_dup = paste0(EMIS_School_ID_CBE_KEY, F2_Subject_Name)
-#     ) |>
-#     filter(duplicated(key_for_dup, fromLast = T) | duplicated(key_for_dup, fromLast = F)) |>
-#     mutate(
-#       Issue = "The subject name is reported more than once for same school!",
-#       Question = "F2_Subject_Name",
-#       Old_value = F2_Subject_Name,
-#       Related_question = "EMIS_School_ID_CBE_KEY",
-#       Related_value = EMIS_School_ID_CBE_KEY
-#     ) |>
-#     select(
-#       any_of(meta_cols),
-#       Question,
-#       Old_value,
-#       Related_question,
-#       Related_value,
-#       KEY,
-#       Issue
-#     )
-# ) |> 
-#   mutate(tool = "Tool 4 - Teacher", sheet = "Additional_Subjects", Old_value = as.character(Old_value))
+lc_tool4.add_subj <- plyr::rbind.fill(
+  clean_data.tool4$Additional_Subjects |>
+    mutate(
+      key_for_dup = paste0(EMIS_School_ID_CBE_KEY, F2_Subject_Name)
+    ) |>
+    filter(duplicated(key_for_dup, fromLast = T) | duplicated(key_for_dup, fromLast = F)) |>
+    mutate(
+      Issue = "The subject name is reported more than once for same school!",
+      Question = "F2_Subject_Name",
+      Old_value = F2_Subject_Name,
+      Related_question = "EMIS_School_ID_CBE_KEY",
+      Related_value = EMIS_School_ID_CBE_KEY
+    ) |>
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    )
+) |>
+  mutate(tool = "Tool 4 - Teacher", sheet = "Additional_Subjects", Old_value = as.character(Old_value))
 
 
 # Logging issues in Tool 5 ------------------------------------------------
@@ -4587,30 +4497,7 @@ lc_tool6 <- plyr::rbind.fill(
       KEY,
       Issue
     ),
-
-  # Duplicated combination of Respondent Name and both Phone Numbers for a Site Visit ID - Removed by QA request
-  # clean_data.tool6$data |>
-  #   mutate(
-  #     parent_id = paste(Sample_Type, Site_Visit_ID, Respondent_Name, Respondent1_Phone_Number, Respondent2_Phone_Number, sep = "-")
-  #   ) |>
-  #   filter(duplicated(parent_id, fromLast = T) | duplicated(parent_id, fromLast = F)) |>
-  #   mutate(
-  #     Issue = "The combination of Respondent Name and his/her phone numbers are duplicated for the Site Visit ID and sample type",
-  #     Question = "",
-  #     Old_value = "",
-  #     Related_question = "",
-  #     Related_value = ""
-  #   ) |> 
-  #   select(
-  #     any_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ) |>
-  #   arrange(Old_value),
+  
   
   # Duplicated combination of Respondent Name and first Phone Number for a Site Visit ID
   clean_data.tool6$data |>
@@ -4656,7 +4543,6 @@ lc_tool6 <- plyr::rbind.fill(
       Issue
     ),
   
-  # Removed for CBE DC
   # clean_data.tool6$data |>
   #   filter(B3 >= 40) |>
   #   mutate(
@@ -4665,7 +4551,7 @@ lc_tool6 <- plyr::rbind.fill(
   #     Old_value = B3,
   #     Related_question = "",
   #     Related_value = ""
-  #   ) |> 
+  #   ) |>
   #   select(
   #     any_of(meta_cols),
   #     Question,
@@ -4725,7 +4611,7 @@ lc_tool6 <- plyr::rbind.fill(
   #     Old_value = B4,
   #     Related_question = "B5",
   #     Related_value = B5
-  #   ) |> 
+  #   ) |>
   #   select(
   #     any_of(meta_cols),
   #     Question,
@@ -4756,26 +4642,6 @@ lc_tool6 <- plyr::rbind.fill(
       Issue
     ),
   
-  # Flagging if All is selected for girls between 13-18 yrs old attending school
-  clean_data.tool6$data |>
-    filter(C5 == "All") |>
-    mutate(
-      Issue = "'All' is selected for question girls between 13-18 years old attending school, please confirm the response.",
-      Question = "C5",
-      Old_value = C5,
-      Related_question = "",
-      Related_value = ""
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-    
   # Flagging if Reported Subject has been added but reported 0 for the number of subjects
   clean_data.tool6$data |>
     filter(D3_2 == 1 & D4_N <= 0) |>
@@ -4796,26 +4662,6 @@ lc_tool6 <- plyr::rbind.fill(
       Issue
     ),
   
-  # Flagging if The reason for improvement of education quality is reported 'More teachers', but also repoted lack of teacher for decreasing attendance
-  # clean_data.tool6$data |>
-  #   filter(D13_2 == 1 & (C10_3 == 1 | C7_1 == 1)) |>
-  #   mutate(
-  #     Issue = "The reason for improvement of education quality is reported 'More teachers', but also reported lack of teacher for decreasing attendance",
-  #     Question = "D13",
-  #     Old_value = D13,
-  #     Related_question = "C10 | C7",
-  #     Related_value = paste0(C10, " | ", C7)
-  #   ) |> 
-  #   select(
-  #     all_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
-  
   # Flagging if More dedicated time on religious studies is reported but also reported Decreased reliance on religious materials/textbook
   clean_data.tool6$data |>
     filter(E3_3 == 1 & E5_2 == 1) |>
@@ -4826,124 +4672,6 @@ lc_tool6 <- plyr::rbind.fill(
       Related_question = "E5",
       Related_value = E5
     ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  # Flagging if reported that it is Safer to traveling to/from school, but also reported his/her girl is extremely vulnerable to traveling to/from school
-  # clean_data.tool6$data |>
-  #   filter(F3 == "Safer" & F11 == "Female" & F12_1 == "Extremely vulnerable") |>
-  #   mutate(
-  #     Issue = "Reported that it is Safer to traverling to/from school, but also reported his/her girl is extremely vulnerable to traveling to/from school",
-  #     Question = "F3",
-  #     Old_value = F3,
-  #     Related_question = "F12_1",
-  #     Related_value = F12_1
-  #   ) |> 
-  #   select(
-  #     all_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
-  # 
-  # # Flagging if reported that it is Less safe to traveling to/from school, but also reported his/her girl is extremely vulnerable to traveling to/from school
-  # clean_data.tool6$data |>
-  #   filter(F3 == "Less safe" & F11 == "Female" & F12_1 == "Not vulnerable") |>
-  #   mutate(
-  #     Issue = "Reported that it is less safer to traverling to/from school, but also reported his/her girl is not vulnerable to traveling to/from school",
-  #     Question = "F3",
-  #     Old_value = F3,
-  #     Related_question = "F12_1",
-  #     Related_value = F12_1
-  #   ) |> 
-  #   select(
-  #     all_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
-  
-  
-  # Flagging if reported that it is Safer to traveling to/from school, but also reported his/her boy is extremely vulnerable to traveling to/from school
-  # clean_data.tool6$data |>
-  #   filter(F6 == "Safer" & F11 == "Male" & F12_1 == "Extremely vulnerable") |>
-  #   mutate(
-  #     Issue = "Reported that it is Safer to traverling to/from school, but also reported his/her boy is extremely vulnerable to traveling to/from school",
-  #     Question = "F6",
-  #     Old_value = F6,
-  #     Related_question = "F12_1",
-  #     Related_value = F12_1
-  #   ) |> 
-  #   select(
-  #     all_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
-  # 
-  # # Flagging if reported that it is Less safe to traveling to/from school, but also reported his/her boy is extremely vulnerable to traveling to/from school
-  # clean_data.tool6$data |>
-  #   filter(F6 == "Less safe" & F11 == "Male" & F12_1 == "Not vulnerable") |>
-  #   mutate(
-  #     Issue = "Reported that it is less safer to traverling to/from school, but also reported his/her boy is not vulnerable to traveling to/from school",
-  #     Question = "F6",
-  #     Old_value = F6,
-  #     Related_question = "F12_1",
-  #     Related_value = F12_1
-  #   ) |> 
-  #   select(
-  #     all_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   )
-  clean_data.tool6$data |>
-    filter(C9 == "Increased" & (C4 %in% c("Few", "None") & C5 %in% c("Few", "None"))) |>
-    mutate(
-      Issue = "It is reported that the attendance of female students has increased but also reported None/Few as the estimation of girls attendance in the community in questions C4 Or C5",
-      Question = "C9",
-      Old_value = C9,
-      Related_question = "C4 | C5",
-      Related_value = paste0(C4, " | ", C5)
-    ) |>
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  clean_data.tool6$data |>
-    filter(C6 == "Increased" & (C2 %in% c("Few", "None") & C3 %in% c("Few", "None"))) |>
-    mutate(
-      Issue = "It is reported that the attendance of male students has increased but also reported None/Few as the estimation of boys attendance in the community in questions C2 Or C3",
-      Question = "C6",
-      Old_value = C6,
-      Related_question = "C2 | C3",
-      Related_value = paste0(C2, " | ", C3)
-    ) |>
     select(
       any_of(meta_cols),
       Question,
@@ -5267,30 +4995,6 @@ lc_tool7 <- plyr::rbind.fill(
       Issue
     ),
   
-  # Duplicated combination of Respondent Name and both Phone Numbers for a Site Visit ID - Removed by QA request
-  # clean_data.tool7$data |>
-  #   mutate(
-  #     shura_mem_id = paste(Sample_Type, Site_Visit_ID, B5, Respondent1_Phone_Number, Respondent2_Phone_Number, sep = "-")
-  #   ) |>
-  #   filter(duplicated(shura_mem_id, fromLast = T) | duplicated(shura_mem_id, fromLast = F)) |>
-  #   mutate(
-  #     Issue = "The combination of Respondent Name and his/her phone numbers are duplicated for the Site Visit ID and sample type",
-  #     Question = "",
-  #     Old_value = "",
-  #     Related_question = "",
-  #     Related_value = ""
-  #   ) |> 
-  #   select(
-  #     any_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ) |>
-  #   arrange(Old_value),
-  
   # Duplicated combination of Respondent Name and first Phone Number for a Site Visit ID
   clean_data.tool7$data |>
     mutate(
@@ -5335,26 +5039,6 @@ lc_tool7 <- plyr::rbind.fill(
       Issue
     ),
   
-  # Flagging if All is selected for girls between 13-18 yrs old attending school
-  clean_data.tool7$data |>
-    filter(D4 == "All") |>
-    mutate(
-      Issue = "'All' is selected for question girls between 13-18 years old attending school, please confirm the response.",
-      Question = "D4",
-      Old_value = D4,
-      Related_question = "",
-      Related_value = ""
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
   # Flagging if Reported Subject has been added but reported 0 for the number of subjects
   clean_data.tool7$data |>
     filter(E2_2 == 1 & E4_N <= 0) |>
@@ -5374,26 +5058,6 @@ lc_tool7 <- plyr::rbind.fill(
       KEY,
       Issue
     ),
-  
-  # Flagging if The reason for improvement of education quality is reported 'More teachers', but also reported lack of teacher for decreasing attendance
-  # clean_data.tool7$data |>
-  #   filter(E12_2 == 1 & (D6_1 == 1 | D9_3 == 1)) |>
-  #   mutate(
-  #     Issue = "The reason for improvement of education quality is reported 'More teachers', but also repoted lack of teacher for decreasing attendance",
-  #     Question = "E12",
-  #     Old_value = as.character(E12),
-  #     Related_question = "D6 | D9",
-  #     Related_value = paste0(D6, " | ", D9)
-  #   ) |> 
-  #   select(
-  #     all_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
   
   # Flagging if More dedicated time on religious studies is reported but also reported Decreased reliance on religious materials/textbook
   clean_data.tool7$data |>
@@ -5435,29 +5099,28 @@ lc_tool7 <- plyr::rbind.fill(
     ),
   
   # New for R4
-  # REmoved for CBE DC
-  # clean_data.tool7$data %>%
-  #   filter(Sample_Type == "Public School") %>% 
-  #   left_join(
-  #     clean_data.tool1$data %>% select(EMIS_School_ID_CBE_KEY, J1.tool1 =  J1), by = "EMIS_School_ID_CBE_KEY"
-  #   ) %>% 
-  #   filter(C1 != J1.tool1) %>% 
-  #   mutate(
-  #     Issue = "The response to whether the school has an active shura or not is inconsistent across tool 7(C1) and tool 1(J1)",
-  #     Question = "C1",
-  #     Old_value = as.character(C1),
-  #     Related_question = "J1(Tool1)",
-  #     Related_value = J1.tool1
-  #   ) |> 
-  #   select(
-  #     any_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ), 
+  clean_data.tool7$data %>%
+    filter(Sample_Type == "Public School") %>%
+    left_join(
+      clean_data.tool1$data %>% select(EMIS_School_ID_CBE_KEY, J1.tool1 =  J1) %>% mutate(EMIS_School_ID_CBE_KEY = as.character(EMIS_School_ID_CBE_KEY)), by = "EMIS_School_ID_CBE_KEY"
+    ) %>%
+    filter(C1 != J1.tool1) %>%
+    mutate(
+      Issue = "The response to whether the school has an active shura or not is inconsistent across tool 7(C1) and tool 1(J1)",
+      Question = "C1",
+      Old_value = as.character(C1),
+      Related_question = "J1(Tool1)",
+      Related_value = J1.tool1
+    ) |>
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
   
   clean_data.tool7$data %>%
     filter(Sample_Type == "CBE") %>% 
@@ -5879,26 +5542,6 @@ lc_tool8 <- plyr::rbind.fill(
       Issue
     ),
   
-  # Flagging if respondent reported permanent closure for the CBE but also reported plan for reopening it. 
-  # clean_data.tool8$data |>
-  #   filter(C7 == "Permanent [closed since beginning of the academic year]" & C11 == "Yes") |>
-  #   mutate(
-  #     Issue = "Respondent reported permanent closure for the CBE but also reported plan for reopening it",
-  #     Question = "C7",
-  #     Old_value = C7,
-  #     Related_question = "C11",
-  #     Related_value = C11
-  #   ) |> 
-  #   select(
-  #     any_of(meta_cols),
-  #     Question,
-  #     Old_value,
-  #     Related_question,
-  #     Related_value,
-  #     KEY,
-  #     Issue
-  #   ),
-  
   # Flagging if type of CBE does not match in questions A1 and D7 
   clean_data.tool8$data |>
     filter((D7 == "ALC (covering more than one grade in one academic year)" & A1 != "ALC (covering more than one grade in one academic year)") |
@@ -6037,35 +5680,6 @@ lc_tool8 <- plyr::rbind.fill(
       KEY,
       Issue
     ),
-
-  #Flag if The total number of male and female students enrolled at this CBE is less than that CBE's headcount of male and female students
-  clean_data.tool8$data |>
-    left_join(
-      clean_data.tool8$Section_2_2_4_Headcount |>
-        mutate(
-          total_headcount_m_f = rowSums(across(c("Headcount_Male_Students", "Headcount_Female_Students")), na.rm  = T)
-        ) |>
-        group_by(KEY = PARENT_KEY) |>
-        summarise(
-          total_headcount_student = sum(total_headcount_m_f, na.rm = T)
-        ) |> select(KEY, total_headcount_student) , by = "KEY") |>
-    filter((J2 + J3) < total_headcount_student) |>
-    mutate(
-      Issue = "The total number of male and female students enrolled at this CBE is less than that CBE's headcount of male and female students.",
-      Question = "J2 + J3",
-      Old_value = as.character(J2+J3),
-      Related_question = "total_headcount_student",
-      Related_value = total_headcount_student
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
   
   clean_data.tool8$data|>
     filter(V16 %in% c("No", "I don’t know")) |>
@@ -6142,121 +5756,121 @@ lc_tool8 <- plyr::rbind.fill(
       Related_value,
       KEY,
       Issue
-    ),
-  
-  clean_data.tool8$data %>% 
-    filter(W3_1 == 1 & W14 == "No") %>% 
-    mutate(
-      Issue = "Hotline Phone number is reported as one of complaint channels being used (W3), while for question W14 (Is there a GRM hotline/phone number visible on site) it is reported No",
-      Question = "W3",
-      Old_value = as.character(W3),
-      Related_question = "W14",
-      Related_value = W14
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  clean_data.tool8$data %>% 
-    filter(W3_1 == 0 & W14 == "Yes") %>% 
-    mutate(
-      Issue = "Hotline Phone number isn't reported as one of complaint channels being used (W3), while for question W14 (Is there a GRM hotline/phone number visible on site) it is reported Yes",
-      Question = "W3",
-      Old_value = as.character(W3),
-      Related_question = "W14",
-      Related_value = W14
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  clean_data.tool8$data %>% 
-    filter(W5_6 == 1 & W17 == "No") %>% 
-    mutate(
-      Issue = "It is reported that complaints are submitted through Email (W5), while for question W17 (Is there a GRM Email visible on site) it is reported No",
-      Question = "W5",
-      Old_value = as.character(W5),
-      Related_question = "W17",
-      Related_value = W17
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  clean_data.tool8$data %>% 
-    filter(W5_6 == 0 & W17 == "Yes") %>% 
-    mutate(
-      Issue = "It isn't reported that complaints are submitted through Email (W5), while for question W17 (Is there a GRM Email visible on site) it is reported Yes",
-      Question = "W5",
-      Old_value = as.character(W5),
-      Related_question = "W17",
-      Related_value = W17
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  clean_data.tool8$data %>% 
-    filter(W5_5 == 1 & W20 == "No") %>% 
-    mutate(
-      Issue = "It is reported that complaints are submitted through Complaint Box (W5), while for question W20 (Is there a complaint box (or any receptable for people to make comments on the class)) it is reported No",
-      Question = "W5",
-      Old_value = as.character(W5),
-      Related_question = "W20",
-      Related_value = W20
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  
-  clean_data.tool8$data %>% 
-    filter(W5_5 == 0 & W20 == "Yes") %>% 
-    mutate(
-      Issue = "It isn't reported that complaints are submitted through Complaint Box (W5), while for question W20 (Is there a complaint box (or any receptable for people to make comments on the class)) it is reported Yes",
-      Question = "W5",
-      Old_value = as.character(W5),
-      Related_question = "W20",
-      Related_value = W20
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
     )
+  
+  # clean_data.tool8$data %>% 
+  #   filter(W3_1 == 1 & W14 == "No") %>% 
+  #   mutate(
+  #     Issue = "Hotline Phone number is reported as one of complaint channels being used (W3), while for question W14 (Is there a GRM hotline/phone number visible on site) it is reported No",
+  #     Question = "W3",
+  #     Old_value = as.character(W3),
+  #     Related_question = "W14",
+  #     Related_value = W14
+  #   ) |> 
+  #   select(
+  #     any_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
+  
+  # clean_data.tool8$data %>% 
+  #   filter(W3_1 == 0 & W14 == "Yes") %>% 
+  #   mutate(
+  #     Issue = "Hotline Phone number isn't reported as one of complaint channels being used (W3), while for question W14 (Is there a GRM hotline/phone number visible on site) it is reported Yes",
+  #     Question = "W3",
+  #     Old_value = as.character(W3),
+  #     Related_question = "W14",
+  #     Related_value = W14
+  #   ) |> 
+  #   select(
+  #     any_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
+  
+  # clean_data.tool8$data %>% 
+  #   filter(W5_6 == 1 & W17 == "No") %>% 
+  #   mutate(
+  #     Issue = "It is reported that complaints are submitted through Email (W5), while for question W17 (Is there a GRM Email visible on site) it is reported No",
+  #     Question = "W5",
+  #     Old_value = as.character(W5),
+  #     Related_question = "W17",
+  #     Related_value = W17
+  #   ) |> 
+  #   select(
+  #     any_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
+  
+  # clean_data.tool8$data %>% 
+  #   filter(W5_6 == 0 & W17 == "Yes") %>% 
+  #   mutate(
+  #     Issue = "It isn't reported that complaints are submitted through Email (W5), while for question W17 (Is there a GRM Email visible on site) it is reported Yes",
+  #     Question = "W5",
+  #     Old_value = as.character(W5),
+  #     Related_question = "W17",
+  #     Related_value = W17
+  #   ) |> 
+  #   select(
+  #     any_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
+  
+  # clean_data.tool8$data %>% 
+  #   filter(W5_5 == 1 & W20 == "No") %>% 
+  #   mutate(
+  #     Issue = "It is reported that complaints are submitted through Complaint Box (W5), while for question W20 (Is there a complaint box (or any receptable for people to make comments on the class)) it is reported No",
+  #     Question = "W5",
+  #     Old_value = as.character(W5),
+  #     Related_question = "W20",
+  #     Related_value = W20
+  #   ) |> 
+  #   select(
+  #     any_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   ),
+  
+  # clean_data.tool8$data %>% 
+  #   filter(W5_5 == 0 & W20 == "Yes") %>% 
+  #   mutate(
+  #     Issue = "It isn't reported that complaints are submitted through Complaint Box (W5), while for question W20 (Is there a complaint box (or any receptable for people to make comments on the class)) it is reported Yes",
+  #     Question = "W5",
+  #     Old_value = as.character(W5),
+  #     Related_question = "W20",
+  #     Related_value = W20
+  #   ) |> 
+  #   select(
+  #     any_of(meta_cols),
+  #     Question,
+  #     Old_value,
+  #     Related_question,
+  #     Related_value,
+  #     KEY,
+  #     Issue
+  #   )
   
 ) |> 
   mutate(tool = "Tool 8 - Class", sheet = "data", Old_value = as.character(Old_value))
@@ -6672,7 +6286,7 @@ lc_tool9 <- plyr::rbind.fill(
     arrange(Old_value),
   
   # Flagging if Sum of Female and Male of GRC is reported 0
-  clean_data.tool9$Questions_Repeat |>
+  clean_data.tool9$data |>
     mutate(
       a12_m_f_number = rowSums(across(c("A12_Female_Numbers", "A12_Male_Numbers")), na.rm = T)
     ) |>
@@ -6699,7 +6313,7 @@ lc_tool9 <- plyr::rbind.fill(
     ),
   
   # Flagging if Sum of Female and Male of GRC for women is reported 0
-  clean_data.tool9$Questions_Repeat |>
+  clean_data.tool9$data |>
     mutate(
       a12_m_f_member = rowSums(across(c("A14_Female_Numbers", "A14_Male_Numbers")), na.rm = T)
     ) |>
@@ -6723,6 +6337,36 @@ lc_tool9 <- plyr::rbind.fill(
       Issue,
       tool,
       sheet
+    ),
+  
+  #NEW in R5
+  #Flag if The total number of male and female students enrolled at this CBE is less than that CBE's headcount of male and female students
+  clean_data.tool9$Questions_Repeat |>
+    left_join(
+      clean_data.tool8$Section_2_2_4_Headcount |>
+        mutate(
+          total_headcount_m_f = rowSums(across(c("Headcount_Male_Students", "Headcount_Female_Students")), na.rm  = T)
+        ) |>
+        group_by(CBE_EMIS_School_ID_CBE_KEY = EMIS_School_ID_CBE_KEY) |>
+        summarise(
+          total_headcount_student = sum(total_headcount_m_f, na.rm = T)
+        ) |> ungroup() , by = c("CBE_EMIS_School_ID_CBE_KEY")) |>
+    filter((E3_Male + E3_Female) < total_headcount_student) |>
+    mutate(
+      Issue = "The total number of male and female students enrolled at this CBE is less than that CBE's headcount of male and female students.",
+      Question = "E3_Male + E3_Female",
+      Old_value = as.character(E3_Male+E3_Female),
+      Related_question = "total_headcount_student",
+      Related_value = total_headcount_student
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
     )
 ) |> 
   mutate(Old_value = as.character(Old_value))
@@ -6741,7 +6385,7 @@ Logic_check_result <- plyr::rbind.fill(
   lc_tool2,
   lc_tool3,
   lc_tool4,
-  # lc_tool4.add_subj, # Removed for CBE DC
+  lc_tool4.add_subj,
   lc_tool5,
   lc_tool6,
   lc_tool7,
