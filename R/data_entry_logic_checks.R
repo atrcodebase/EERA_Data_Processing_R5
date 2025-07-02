@@ -452,13 +452,13 @@ lc_tool_data_entry <- rbind(
       KEY,
       Issue
     ),
-  #Flagging if the number of Male Teachers and Staff Present in attendance book is more than the number of all teachers and staff in Attendance Books
+  #Flagging if the number of Male Teachers Present in attendance book is more than the number of all teachers and staff in Attendance Books
   clean_data.tool0$data |>
-    filter(Tool2_Teachers_Staff_Present_Male > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
+    filter(Tool2_Total_Male_Teachers > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
     mutate(
-      Issue = "The number of Male Teachers and Staff Present in attendance book is more than the number of all teachers and staff in Attendance Books.",
-      Question = "Tool2_Teachers_Staff_Present_Male",
-      Old_value = Tool2_Teachers_Staff_Present_Male ,
+      Issue = "The number of Male Teachers in attendance book is more than the number of all teachers and staff in Attendance Books.",
+      Question = "Tool2_Total_Male_Teachers",
+      Old_value = Tool2_Total_Male_Teachers ,
       Related_question = "Tool2_N_Teachers_Staff_All_Attendance_Books",
       Related_value = Tool2_N_Teachers_Staff_All_Attendance_Books
     ) |> 
@@ -471,13 +471,14 @@ lc_tool_data_entry <- rbind(
       KEY,
       Issue
     ),
-  #Flagging if the number of Male Teachers and Staff absent in attendance book is more than the number of all teachers and staff in Attendance Books
+  
+  #Flagging if the number of Male Staffs Present in attendance book is more than the number of all teachers and staff in Attendance Books
   clean_data.tool0$data |>
-    filter(Tool2_Teachers_Staff_Absent_Male > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
+    filter(Tool2_Total_Male_Staff_Members > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
     mutate(
-      Issue = "The number of Male Teachers and Staff Absent in attendance book is more than the number of all teachers and staff in Attendance Books.",
-      Question = "Tool2_Teachers_Staff_Absent_Male",
-      Old_value = Tool2_Teachers_Staff_Absent_Male ,
+      Issue = "The number of Male Staffs in attendance book is more than the number of all teachers and staff in Attendance Books.",
+      Question = "Tool2_Total_Male_Staff_Members",
+      Old_value = Tool2_Total_Male_Staff_Members ,
       Related_question = "Tool2_N_Teachers_Staff_All_Attendance_Books",
       Related_value = Tool2_N_Teachers_Staff_All_Attendance_Books
     ) |> 
@@ -490,13 +491,14 @@ lc_tool_data_entry <- rbind(
       KEY,
       Issue
     ),
-  #Flagging if the total of male present and absent teacher and stuff is more than the teacher and stuff in attendance book
+  
+  #Flagging if the number of Female Teachers Present in attendance book is more than the number of all teachers and staff in Attendance Books
   clean_data.tool0$data |>
-    filter(Tool2_Total_Teachers_Staff_Male > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
+    filter(Tool2_Total_Female_Teachers > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
     mutate(
-      Issue = "The total of male present and absent teacher and stuff is more than the teacher and stuff in attendance book.",
-      Question = "Tool2_Total_Teachers_Staff_Male",
-      Old_value = Tool2_Total_Teachers_Staff_Male ,
+      Issue = "The number of Female Teachers in attendance book is more than the number of all teachers and staff in Attendance Books.",
+      Question = "Tool2_Total_Female_Teachers",
+      Old_value = Tool2_Total_Female_Teachers ,
       Related_question = "Tool2_N_Teachers_Staff_All_Attendance_Books",
       Related_value = Tool2_N_Teachers_Staff_All_Attendance_Books
     ) |> 
@@ -509,13 +511,14 @@ lc_tool_data_entry <- rbind(
       KEY,
       Issue
     ),
-  #Flagging if the number of female Teachers and Staff present in attendance book is more than the number of all teachers and staff in Attendance Books
+  
+  #Flagging if the number of Female Staffs Present in attendance book is more than the number of all teachers and staff in Attendance Books
   clean_data.tool0$data |>
-    filter(Tool2_Teachers_Staff_Present_Female > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
+    filter(Tool2_Total_Female_Staff_Members > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
     mutate(
-      Issue = "The number of Female Teachers and Staff Present in attendance book is more than the number of all teachers and staff in Attendance Books.",
-      Question = "Tool2_Teachers_Staff_Present_Female",
-      Old_value = Tool2_Teachers_Staff_Present_Female ,
+      Issue = "The number of Female Staffs in attendance book is more than the number of all teachers and staff in Attendance Books.",
+      Question = "Tool2_Total_Female_Staff_Members",
+      Old_value = Tool2_Total_Female_Staff_Members ,
       Related_question = "Tool2_N_Teachers_Staff_All_Attendance_Books",
       Related_value = Tool2_N_Teachers_Staff_All_Attendance_Books
     ) |> 
@@ -528,13 +531,15 @@ lc_tool_data_entry <- rbind(
       KEY,
       Issue
     ),
-  #Flagging if the number of female Teachers and Staff absent in attendance book is more than the number of all teachers and staff in Attendance Books
+  
+  
+  #Flagging if the number of Total Teachers Present in attendance book is more than the number of all teachers and staff in Attendance Books
   clean_data.tool0$data |>
-    filter(Tool2_Teachers_Staff_Absent_Female > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
+    filter(Tool2_Total_Teachers > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
     mutate(
-      Issue = "The number of Female Teachers and Staff Absent in attendance book is more than the number of all teachers and staff in Attendance Books.",
-      Question = "Tool2_Teachers_Staff_Absent_Female",
-      Old_value = Tool2_Teachers_Staff_Absent_Female ,
+      Issue = "The number of Total Teachers in attendance book is more than the number of all teachers and staff in Attendance Books.",
+      Question = "Tool2_Total_Teachers",
+      Old_value = Tool2_Total_Teachers ,
       Related_question = "Tool2_N_Teachers_Staff_All_Attendance_Books",
       Related_value = Tool2_N_Teachers_Staff_All_Attendance_Books
     ) |> 
@@ -547,13 +552,14 @@ lc_tool_data_entry <- rbind(
       KEY,
       Issue
     ),
-  #Flagging if the total of female present and absent teacher and stuff is more than the teacher and stuff in attendance book
+  
+  #Flagging if the number of Total Staffs Present in attendance book is more than the number of all teachers and staff in Attendance Books
   clean_data.tool0$data |>
-    filter(Tool2_Total_Teachers_Staff_Female > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
+    filter(Tool2_Total_Staff_Members > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
     mutate(
-      Issue = "The total of female present and absent teacher and stuff is more than the teacher and stuff in attendance book.",
-      Question = "Tool2_Total_Teachers_Staff_Female",
-      Old_value = Tool2_Total_Teachers_Staff_Female ,
+      Issue = "The number of Total Staffs in attendance book is more than the number of all teachers and staff in Attendance Books.",
+      Question = "Tool2_Total_Staff_Members",
+      Old_value = Tool2_Total_Staff_Members ,
       Related_question = "Tool2_N_Teachers_Staff_All_Attendance_Books",
       Related_value = Tool2_N_Teachers_Staff_All_Attendance_Books
     ) |> 
@@ -566,51 +572,14 @@ lc_tool_data_entry <- rbind(
       KEY,
       Issue
     ),
-  #Flagging if the number of not identifiable gender of Teachers and Staff present in attendance book is more than the number of all teachers and staff in Attendance Books
+  
+  #Flagging if the number of Total Teachers and Staffs Present in attendance book is more than the number of all teachers and staff in Attendance Books
   clean_data.tool0$data |>
-    filter(Tool2_Teachers_Staff_Present_Gender_Not_Identifiable > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
+    filter((Tool2_Total_Teachers + Tool2_Total_Staff_Members) > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
     mutate(
-      Issue = "The number of not identifiable gender of Teachers and Staff present in attendance book is more than the number of all teachers and staff in Attendance Books.",
-      Question = "Tool2_Teachers_Staff_Present_Gender_Not_Identifiable",
-      Old_value = Tool2_Teachers_Staff_Present_Gender_Not_Identifiable ,
-      Related_question = "Tool2_N_Teachers_Staff_All_Attendance_Books",
-      Related_value = Tool2_N_Teachers_Staff_All_Attendance_Books
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  #Flagging if the number of not identifiable gender of Teachers and Staff absent in attendance book is more than the number of all teachers and staff in Attendance Books
-  clean_data.tool0$data |>
-    filter(Tool2_Teachers_Staff_Absent_Gender_Not_Identifiable > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
-    mutate(
-      Issue = "The number of not identifiable gender of Teachers and Staff absent in attendance book is more than the number of all teachers and staff in Attendance Books.",
-      Question = "Tool2_Teachers_Staff_Absent_Gender_Not_Identifiable",
-      Old_value = Tool2_Teachers_Staff_Absent_Gender_Not_Identifiable ,
-      Related_question = "Tool2_N_Teachers_Staff_All_Attendance_Books",
-      Related_value = Tool2_N_Teachers_Staff_All_Attendance_Books
-    ) |> 
-    select(
-      any_of(meta_cols),
-      Question,
-      Old_value,
-      Related_question,
-      Related_value,
-      KEY,
-      Issue
-    ),
-  #Flagging if the total of not identifiable gender of Teachers and Staff in attendance book is more than the number of all teachers and staff in Attendance Books
-  clean_data.tool0$data |>
-    filter(Tool2_Total_Teachers_Staff_Gender_Not_Identifiable > Tool2_N_Teachers_Staff_All_Attendance_Books) |> 
-    mutate(
-      Issue = "The total of not identifiable gender of Teachers and Staff in attendance book is more than the number of all teachers and staff in Attendance Books.",
-      Question = "Tool2_Total_Teachers_Staff_Gender_Not_Identifiable ",
-      Old_value = Tool2_Total_Teachers_Staff_Gender_Not_Identifiable ,
+      Issue = "The number of Total Teachers and Staffs in attendance book is more than the number of all teachers and staff in Attendance Books.",
+      Question = "(Tool2_Total_Teachers + Tool2_Total_Staff_Members)",
+      Old_value = (Tool2_Total_Teachers + Tool2_Total_Staff_Members) ,
       Related_question = "Tool2_N_Teachers_Staff_All_Attendance_Books",
       Related_value = Tool2_N_Teachers_Staff_All_Attendance_Books
     ) |> 
