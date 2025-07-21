@@ -93,6 +93,7 @@ correction_log <- correction_log %>%
       is.null(New_Value) | New_Value == "NULL" ~ NA_character_,
       TRUE ~ New_Value
     ),
+    old_value = as.character(old_value),
     old_value = case_when(
       is.null(old_value) | old_value == "NULL" ~ NA_character_,
       TRUE ~ old_value
@@ -288,8 +289,8 @@ source("R/missing_qa.R")
 source("R/check_select_multiple_questions.R")
 
 
-# re-calculate the calculated variables and compare any changes not applied PENDING ALSO KDR is not included
-# source("R/calculate_cols_check.R")
+# re-calculate the calculated variables and compare any changes not applied - kDR left
+source("R/calculate_cols_check.R")
 
 
 # Outlier Check ----------------------------------------------------------- PENDING - RUN FOR FINAL TURN
