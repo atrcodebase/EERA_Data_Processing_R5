@@ -202,7 +202,7 @@ missing_qa_log <- rbind(
   log_questions(data = clean_data.tool6$data, columns = tool6.audio_cols, suffix = "Translation", sheet = "data"),
   log_questions(data = clean_data.tool7$data, columns = tool7.audio_cols, suffix = "Translation", sheet = "data"),
   log_questions(data = clean_data.tool8$data, columns = tool8.audio_cols, suffix = "Translation", sheet = "data"),
-  log_questions(data = clean_data.tool9$Questions_Repeat, columns = "A15_Audio", suffix = "Translation", sheet = "Questions_Repeat"),
+  # log_questions(data = clean_data.tool9$Questions_Repeat, columns = "A15_Audio", suffix = "Translation", sheet = "Questions_Repeat"),
   log_questions(data = clean_data.tool9$data, columns = "Surveyor_Comments", suffix = "Translation", sheet = "data")
 )
 
