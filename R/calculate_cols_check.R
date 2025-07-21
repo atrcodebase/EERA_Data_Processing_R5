@@ -1,17 +1,17 @@
 # create the necessary columns --------------------------------------------
 # Tool 0
-clean_data.tool0$data <- clean_data.tool0$data |>
-  mutate(
-    tool2_total_compare.re_calc = case_when(
-      Tool2_N_Teachers_Staff_All_Attendance_Books == (Coalesce(Tool2_Total_Teachers_Staff_Male) + Coalesce(Tool2_Total_Teachers_Staff_Female) + Coalesce(Tool2_Total_Teachers_Staff_Gender_Not_Identifiable)) ~ 0,
-      TRUE ~ 1
-    ),
-    # tool3_headcount_conducted_total = case_when(
-    #   Tool3_Headcount_Conducted
-    # )
-    
-    # tool3_headcount_conducted_total : Left behind
-  )
+# clean_data.tool0$data <- clean_data.tool0$data |>
+#   mutate(
+#     tool2_total_compare.re_calc = case_when(
+#       Tool2_N_Teachers_Staff_All_Attendance_Books == (Coalesce(Tool2_Total_Teachers_Staff_Male) + Coalesce(Tool2_Total_Teachers_Staff_Female) + Coalesce(Tool2_Total_Teachers_Staff_Gender_Not_Identifiable)) ~ 0,
+#       TRUE ~ 1
+#     ),
+#     # tool3_headcount_conducted_total = case_when(
+#     #   Tool3_Headcount_Conducted
+#     # )
+#     
+#     # tool3_headcount_conducted_total : Left behind
+#   )
 
 
 clean_data.tool0$Tool3_T2_Classes_VD <- clean_data.tool0$Tool3_T2_Classes_VD |>
@@ -22,6 +22,7 @@ clean_data.tool0$Tool3_T2_Classes_VD <- clean_data.tool0$Tool3_T2_Classes_VD |>
       TRUE ~ 0
     )
   )
+
 
 # Tool 1 KDR
 clean_data.tool1_kdr$data <- clean_data.tool1_kdr$data %>% 
@@ -138,16 +139,16 @@ calculate_issues <- plyr::rbind.fill(
   
   
   # Tool 0 
-  clean_data.tool0$data |>
-    filter(tool2_total_compare != tool2_total_compare.re_calc) |>
-    mutate(
-      issue = "The changes in the dataset has affected this value, it should be recalculated.",
-      question ="tool2_total_compare",
-      tool = "Tool Data Entry",
-      sheet = "data"
-    ) |>
-    select(any_of(meta_cols), question, old_value = tool2_total_compare,
-           new_value = tool2_total_compare.re_calc, issue, tool, sheet, KEY),
+  # clean_data.tool0$data |>
+  #   filter(tool2_total_compare != tool2_total_compare.re_calc) |>
+  #   mutate(
+  #     issue = "The changes in the dataset has affected this value, it should be recalculated.",
+  #     question ="tool2_total_compare",
+  #     tool = "Tool Data Entry",
+  #     sheet = "data"
+  #   ) |>
+  #   select(any_of(meta_cols), question, old_value = tool2_total_compare,
+  #          new_value = tool2_total_compare.re_calc, issue, tool, sheet, KEY),
 
   clean_data.tool0$Tool3_T2_Classes_VD |>
     filter(tool3_t2_variance_calculate != tool3_t2_variance_calculate.re_calc) |>
@@ -182,7 +183,7 @@ calculate_issues <- plyr::rbind.fill(
       tool = "Tool 2 - Light",
       sheet = "data"
     ) |> 
-    select(all_of(meta_cols), question, old_value = School_indx,
+    select(any_of(meta_cols), question, old_value = School_indx,
            new_value = School_indx.re_calc, issue, tool, sheet, KEY),
   
   clean_data.tool2$data |> 
@@ -193,7 +194,7 @@ calculate_issues <- plyr::rbind.fill(
       tool = "Tool 2 - Light",
       sheet = "data"
     ) |> 
-    select(all_of(meta_cols), question, old_value = School_rep,
+    select(any_of(meta_cols), question, old_value = School_rep,
            new_value = School_rep.re_calc, issue, tool, sheet, KEY),
 
   
