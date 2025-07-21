@@ -1714,6 +1714,88 @@ lc_tool2 <- plyr::rbind.fill(
       Related_value,
       KEY,
       Issue
+    ),
+  
+  # New R5
+  # Flagging if the number of distributed PS Stationary kits is reported more than what the school did receive.
+  clean_data.tool2$data %>% 
+    filter(H6 > H4) %>%
+    mutate(
+      Issue = "The number of distributed Kit-Edari is reported more than what the school received.",
+      Question = "H6",
+      Old_value = H6,
+      Related_question = "H4",
+      Related_value = H4
+    ) |>
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Flagging if the number of distributed Teacher kits is reported more than what the school did receive.
+  clean_data.tool2$data %>% 
+    filter(i6 > i4_Yes) %>%
+    mutate(
+      Issue = "The number of distributed Teacher's Kit is reported more than what the school received.",
+      Question = "i6",
+      Old_value = i6,
+      Related_question = "i4_Yes",
+      Related_value = i4_Yes
+    ) |>
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Flagging if the number of distributed Student kits is reported more than what the school did receive.
+  clean_data.tool2$data %>% 
+    filter(J6 > J4_Yes) %>%
+    mutate(
+      Issue = "The number of distributed Students's Kit is reported more than what the school received.",
+      Question = "J6",
+      Old_value = J6,
+      Related_question = "J4_Yes",
+      Related_value = J4_Yes
+    ) |>
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Flagging if the number of distributed Textbooks is reported more than what the school did receive.
+  clean_data.tool2$data %>% 
+    filter(Textbooks_Distributed == "[Integer]") %>% 
+    filter(N_Textbooks_Distributed > N_Textbooks_Received) %>%
+    mutate(
+      Issue = "The number of distributed textbooks is reported more than what the school received.",
+      Question = "N_Textbooks_Distributed",
+      Old_value = N_Textbooks_Distributed,
+      Related_question = "N_Textbooks_Received",
+      Related_value = N_Textbooks_Received
+    ) |>
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
     )
     
 ) |> 
@@ -2814,6 +2896,950 @@ lc_tool2.headmaster_operationality_and_other <- plyr::rbind.fill(
     
 ) |> mutate(tool = "Tool 2 - Light", sheet = "Headmasters", Old_value = as.character(Old_value))
 
+
+# New in R5
+grades_received_kits_and_operational_grades <- clean_data.tool2$data %>% 
+  left_join(
+    clean_data.tool2$School_Operationality %>% 
+      select(EMIS_School_ID_CBE_KEY, Grade_Value = Grade, is_operational = C13A1) %>% 
+      filter(!is.na(Grade_Value) & Grade_Value != "") %>% 
+      pivot_wider(names_from = Grade_Value, values_from = Grade_Value, values_fill = 0, names_prefix = "opt_grade_", values_fn = length) %>% 
+      filter(is_operational == "No"),
+    by = "EMIS_School_ID_CBE_KEY"
+  )
+  
+lc_grades_received_kits_and_operational_grades <- plyr::rbind.fill(
+  # Grade 1 
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_1 == 1 & opt_grade_1 == 1) |>
+    mutate(
+      Issue = "Grade 1 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 2
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_2 == 1 & opt_grade_2 == 1) |>
+    mutate(
+      Issue = "Grade 2 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 3
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_3 == 1 & opt_grade_3 == 1) |>
+    mutate(
+      Issue = "Grade 3 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 4
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_4 == 1 & opt_grade_4 == 1) |>
+    mutate(
+      Issue = "Grade 4 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 5
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_5 == 1 & opt_grade_5 == 1) |>
+    mutate(
+      Issue = "Grade 5 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 6
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_6 == 1 & opt_grade_6 == 1) |>
+    mutate(
+      Issue = "Grade 6 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 7
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_7 == 1 & opt_grade_7 == 1) |>
+    mutate(
+      Issue = "Grade 7 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 8
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_8 == 1 & opt_grade_8 == 1) |>
+    mutate(
+      Issue = "Grade 8 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 9
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_9 == 1 & opt_grade_9 == 1) |>
+    mutate(
+      Issue = "Grade 9 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 10
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_10 == 1 & opt_grade_10 == 1) |>
+    mutate(
+      Issue = "Grade 10 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 11
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_11 == 1 & opt_grade_11 == 1) |>
+    mutate(
+      Issue = "Grade 11 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 12
+  grades_received_kits_and_operational_grades |>
+    filter(i6_Grades_12 == 1 & opt_grade_12 == 1) |>
+    mutate(
+      Issue = "Grade 12 is selected as the Grade for which the Teacher has received the Teacher Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "i6_Grades",
+      Old_value = i6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Student Kits
+  # Grade 1
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_1 == 1 & opt_grade_1 == 1) |>
+    mutate(
+      Issue = "Grade 1 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 2
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_1 == 1 & opt_grade_2 == 1) |>
+    mutate(
+      Issue = "Grade 2 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 3
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_3 == 1 & opt_grade_3 == 1) |>
+    mutate(
+      Issue = "Grade 3 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 4
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_4 == 1 & opt_grade_4 == 1) |>
+    mutate(
+      Issue = "Grade 4 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 5
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_5 == 1 & opt_grade_5 == 1) |>
+    mutate(
+      Issue = "Grade 5 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 6
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_6 == 1 & opt_grade_6 == 1) |>
+    mutate(
+      Issue = "Grade 6 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 7
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_7 == 1 & opt_grade_7 == 1) |>
+    mutate(
+      Issue = "Grade 7 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 8
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_8 == 1 & opt_grade_8 == 1) |>
+    mutate(
+      Issue = "Grade 8 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 9
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_9 == 1 & opt_grade_9 == 1) |>
+    mutate(
+      Issue = "Grade 9 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 10
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_10 == 1 & opt_grade_10 == 1) |>
+    mutate(
+      Issue = "Grade 10 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 11
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_11 == 1 & opt_grade_11 == 1) |>
+    mutate(
+      Issue = "Grade 11 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 12
+  grades_received_kits_and_operational_grades |>
+    filter(J6_Grades_12 == 1 & opt_grade_12 == 1) |>
+    mutate(
+      Issue = "Grade 12 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "J6_Grades",
+      Old_value = J6_Grades,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Mini Library
+  # Grade 1
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_1 == 1 & opt_grade_1 == 1) %>% 
+    mutate(
+      Issue = "Grade 1 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 2
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_2 == 1 & opt_grade_2 == 1) %>% 
+    mutate(
+      Issue = "Grade 2 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 3
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_3 == 1 & opt_grade_3 == 1) %>% 
+    mutate(
+      Issue = "Grade 3 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 4
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_4 == 1 & opt_grade_4 == 1) %>% 
+    mutate(
+      Issue = "Grade 4 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 5
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_5 == 1 & opt_grade_5 == 1) %>% 
+    mutate(
+      Issue = "Grade 5 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 6
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_6 == 1 & opt_grade_6 == 1) %>% 
+    mutate(
+      Issue = "Grade 6 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 7
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_7 == 1 & opt_grade_7 == 1) %>% 
+    mutate(
+      Issue = "Grade 7 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 8
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_8 == 1 & opt_grade_8 == 1) %>% 
+    mutate(
+      Issue = "Grade 8 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 9
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_9 == 1 & opt_grade_9 == 1) %>% 
+    mutate(
+      Issue = "Grade 9 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 10
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_10 == 1 & opt_grade_10 == 1) %>% 
+    mutate(
+      Issue = "Grade 10 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 11
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_11 == 1 & opt_grade_11 == 1) %>% 
+    mutate(
+      Issue = "Grade 11 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Grade 12
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Mini_Library_12 == 1 & opt_grade_12 == 1) %>% 
+    mutate(
+      Issue = "Grade 12 is selected as the Grade which will benefit from Mini-library, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Mini_Library",
+      Old_value = Grades_Mini_Library,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  
+  # Textbooks
+  # Grade 1
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_1 == 1 & opt_grade_1 == 1) %>% 
+    mutate(
+      Issue = "Grade 1 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 2
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_2 == 1 & opt_grade_2 == 1) %>% 
+    mutate(
+      Issue = "Grade 2 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 3
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_3 == 1 & opt_grade_3 == 1) %>% 
+    mutate(
+      Issue = "Grade 3 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 4
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_4 == 1 & opt_grade_4 == 1) %>% 
+    mutate(
+      Issue = "Grade 4 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 5
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_5 == 1 & opt_grade_5 == 1) %>% 
+    mutate(
+      Issue = "Grade 5 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 6
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_6 == 1 & opt_grade_6 == 1) %>% 
+    mutate(
+      Issue = "Grade 6 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 7
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_7 == 1 & opt_grade_7 == 1) %>% 
+    mutate(
+      Issue = "Grade 7 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 8
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_8 == 1 & opt_grade_8 == 1) %>% 
+    mutate(
+      Issue = "Grade 8 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 9
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_9 == 1 & opt_grade_9 == 1) %>% 
+    mutate(
+      Issue = "Grade 9 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 10
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_10 == 1 & opt_grade_10 == 1) %>% 
+    mutate(
+      Issue = "Grade 10 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 11
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_11 == 1 & opt_grade_11 == 1) %>% 
+    mutate(
+      Issue = "Grade 11 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    ),
+  # Grade 12
+  grades_received_kits_and_operational_grades |>
+    filter(Grades_Textbooks_12 == 1 & opt_grade_12 == 1) %>% 
+    mutate(
+      Issue = "Grade 12 is selected as the Grade which will benefit from Textbooks, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
+      Question = "Grades_Textbooks",
+      Old_value = Grades_Textbooks,
+      Related_question = "C13A1(School_Operationality)",
+      Related_value = ""
+    ) |> 
+    select(
+      any_of(meta_cols),
+      Question,
+      Old_value,
+      Related_question,
+      Related_value,
+      KEY,
+      Issue
+    )
+  
+)
 
 # Logging issues in Tool 3 ------------------------------------------------
 lc_tool3 <- plyr::rbind.fill(
@@ -6382,6 +7408,7 @@ Logic_check_result <- plyr::rbind.fill(
   lc_tool2.shift,
   operational_grades_not_reported_in_shifts_log,
   lc_tool2.school_operationality,
+  lc_grades_received_kits_and_operational_grades, # New in R5
   lc_tool2,
   lc_tool3,
   lc_tool4,
