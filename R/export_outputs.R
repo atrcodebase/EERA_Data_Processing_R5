@@ -13,27 +13,27 @@ clean_data.tool1_kdr_for_client$Shifts_Detail <- NULL
 clean_data.tool1_kdr_for_client$Headmasters <- NULL
 
 # file.edit("./R/add_qa_status.R")
-write.xlsx(clean_data.tool0, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool0_EERA_R4_Public_SchoolCBE_Data_Entry_Tool_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool0, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool0_EERA_R5_PS_CBE_DE_Tool_", Sys.Date(),".xlsx"))
 
-write.xlsx(clean_data.tool1_kdr, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool1_KDR_EERA_R4_PS_Headmaster_Interview_cleaned_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool1, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool1_EERA_R4_PS_Headmaster_Interview_cleaned_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool2, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool2_EERA_R4_PS_Light_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool3, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool3_EERA_R4_PS_Student_Document_Headcount_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool4, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool4_EERA_R4_PS_Teacher_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool5, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool5_EERA_R4_PS_WASH_Observation_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool6, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool6_EERA_R4_PS_CBE_Parent_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool7, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool7_EERA_R4_PS_CBE_Shura_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool8, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool8_EERA_R4_CBE_Class_Level_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool9, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool9_EERA_R4_CBE_IP_Level_Tool_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool1_kdr, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool1_KDR_EERA_R5_PS_cleaned_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool1, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool1_EERA_R5_PS_cleaned_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool2, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool2_EERA_R5_PS_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool3, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool3_EERA_R5_PS_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool4, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool4_EERA_R5_PS_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool5, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool5_EERA_R5_PS_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool6, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool6_EERA_R5_PS_CBE_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool7, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool7_EERA_R5_PS_CBE_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool8, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool8_EERA_R5_CBE_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool9, paste0(output_data_path, "cleaned_dfs/unsterilized/Tool9_EERA_R5_CBE_", Sys.Date(),".xlsx"))
 
 # Exporting unsterilized version of clean datasets -----------------------------
-write.xlsx(clean_data.tool0_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool0_EERA_R4_PSCBE_Data_Entry_Tool_Unlabeled_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool1_kdr_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool1_K_EERA_R4_PS_Headmaster_cleaned_Unlabeled_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool1_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool1_EERA_R4_PS_Headmaster_cleaned_Unlabeled_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool2_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool2_EERA_R4_PS_Light_Tool_Unlabeled_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool3_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool3_EERA_R4_PS_Headcount_Unlabeled_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool4_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool4_EERA_R4_PS_Teacher_Tool_Unlabeled_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool5_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool5_EERA_R4_PS_WASH_Observation_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool0_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool0_EERA_R5_PSCBE_DE_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool1_kdr_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool1_K_EERA_R5_cleaned_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool1_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool1_EERA_R5_PS_cleaned_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool2_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool2_EERA_R5_PS_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool3_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool3_EERA_R5_PS_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool4_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool4_EERA_R5_PS_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool5_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool5_EERA_R5_PS_Unlabeled_", Sys.Date(),".xlsx"))
 
 # Public School
 clean_data.tool6_PS_for_client_ulabeled <- clean_data.tool6_for_client_ulabeled
@@ -43,7 +43,7 @@ filter(Sample_Type == "Public School")
 clean_data.tool6_PS_for_client_ulabeled$Subjects_Added <- clean_data.tool6_PS_for_client_ulabeled$Subjects_Added |>
   filter(PARENT_KEY %in% clean_data.tool6_PS_for_client_ulabeled$data$KEY)
 
-write.xlsx(clean_data.tool6_PS_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool6_EERA_R4_PS_Parent_Tool_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool6_PS_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool6_EERA_R5_PS_Unlabeled_", Sys.Date(),".xlsx"))
 
 # CBE
 clean_data.tool6_CBE_for_client_ulabeled <- clean_data.tool6_for_client_ulabeled
@@ -53,7 +53,7 @@ clean_data.tool6_CBE_for_client_ulabeled$data <- clean_data.tool6_CBE_for_client
 clean_data.tool6_CBE_for_client_ulabeled$Subjects_Added <- clean_data.tool6_CBE_for_client_ulabeled$Subjects_Added |>
   filter(PARENT_KEY %in% clean_data.tool6_CBE_for_client_ulabeled$data$KEY)
 
-write.xlsx(clean_data.tool6_CBE_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool6_EERA_R4_CBE_Parent_Tool_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool6_CBE_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool6_EERA_R5_CBE_Unlabeled_", Sys.Date(),".xlsx"))
 
 # Public School
 clean_data.tool7_PS_for_client_ulabeled <- clean_data.tool7_for_client_ulabeled
@@ -67,7 +67,7 @@ clean_data.tool7_PS_for_client_ulabeled$Subjects_Added <- clean_data.tool7_PS_fo
   filter(PARENT_KEY %in% clean_data.tool7_PS_for_client_ulabeled$data$KEY)
 
 
-write.xlsx(clean_data.tool7_PS_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool7_EERA_R4_PS_Shura_Tool_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool7_PS_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool7_EERA_R5_PS_Unlabeled_", Sys.Date(),".xlsx"))
 
 # CBE
 clean_data.tool7_CBE_for_client_ulabeled <- clean_data.tool7_for_client_ulabeled
@@ -80,18 +80,18 @@ clean_data.tool7_CBE_for_client_ulabeled$C6_list_members <- clean_data.tool7_CBE
 clean_data.tool7_CBE_for_client_ulabeled$Subjects_Added <- clean_data.tool7_CBE_for_client_ulabeled$Subjects_Added |>
   filter(PARENT_KEY %in% clean_data.tool7_CBE_for_client_ulabeled$data$KEY)
 
-write.xlsx(clean_data.tool7_CBE_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool7_EERA_R4_CBE_Shura_Tool_Unlabeled_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool8_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool8_EERA_R4_CBE_Class_Level_Tool_Unlabeled_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool9_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool9_EERA_R4_CBE_IP_Level_Tool_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool7_CBE_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool7_EERA_R5_CBE_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool8_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool8_EERA_R5_CBE_Unlabeled_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool9_for_client_ulabeled, paste0(output_data_path, "cleaned_dfs/sterilized/unlabled/Tool9_EERA_R5_CBE_Unlabeled_", Sys.Date(),".xlsx"))
 
 # Exporting for client version of clean datasets -------------------------------
-write.xlsx(clean_data.tool0_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool0_EERA_R4_PSCBE_Data_Entry_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool1_kdr_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool1_K_EERA_R4_PS_Headmaster_cleaned_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool1_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool1_EERA_R4_PS_Headmaster_cleaned_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool2_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool2_EERA_R4_PS_Light_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool3_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool3_EERA_R4_PS_Headcount_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool4_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool4_EERA_R4_PS_Teacher_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool5_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool5_EERA_R4_PS_WASH_Observation_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool0_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool0_EERA_R5_PSCBE_DE_Tool_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool1_kdr_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool1_K_EERA_R5_PS_cleaned_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool1_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool1_EERA_R5_PS_cleaned_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool2_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool2_EERA_R5_PS_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool3_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool3_EERA_R5_PS_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool4_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool4_EERA_R5_PS_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool5_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool5_EERA_R5_PS_", Sys.Date(),".xlsx"))
 
 # Public School
 clean_data.tool6_PS_for_client <- clean_data.tool6_for_client
@@ -101,7 +101,7 @@ clean_data.tool6_PS_for_client$data <- clean_data.tool6_PS_for_client$data |>
 clean_data.tool6_PS_for_client$Subjects_Added <- clean_data.tool6_PS_for_client$Subjects_Added |>
   filter(PARENT_KEY %in% clean_data.tool6_PS_for_client$data$KEY)
 
-write.xlsx(clean_data.tool6_PS_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool6_EERA_R4_Public_PS_Tool_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool6_PS_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool6_EERA_R5_PS_", Sys.Date(),".xlsx"))
 
 # CBE
 clean_data.tool6_CBE_for_client <- clean_data.tool6_for_client
@@ -111,7 +111,7 @@ clean_data.tool6_CBE_for_client$data <- clean_data.tool6_CBE_for_client$data |>
 clean_data.tool6_CBE_for_client$Subjects_Added <- clean_data.tool6_CBE_for_client$Subjects_Added |>
   filter(PARENT_KEY %in% clean_data.tool6_CBE_for_client$data$KEY)
 
-write.xlsx(clean_data.tool6_CBE_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool6_EERA_R4_CBE_Parent_Tool_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool6_CBE_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool6_EERA_R5_CBE_", Sys.Date(),".xlsx"))
 
 # Public School
 clean_data.tool7_PS_for_client <- clean_data.tool7_for_client
@@ -124,7 +124,7 @@ clean_data.tool7_PS_for_client$C6_list_members <- clean_data.tool7_PS_for_client
 clean_data.tool7_PS_for_client$Subjects_Added <- clean_data.tool7_PS_for_client$Subjects_Added |>
   filter(PARENT_KEY %in% clean_data.tool7_PS_for_client$data$KEY)
 
-write.xlsx(clean_data.tool7_PS_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool7_EERA_R4_PS_Shura_Tool_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool7_PS_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool7_EERA_R5_PS_", Sys.Date(),".xlsx"))
 
 # CBE
 clean_data.tool7_CBE_for_client <- clean_data.tool7_for_client
@@ -138,9 +138,9 @@ clean_data.tool7_CBE_for_client$Subjects_Added <- clean_data.tool7_CBE_for_clien
   filter(PARENT_KEY %in% clean_data.tool7_CBE_for_client$data$KEY)
 
 
-write.xlsx(clean_data.tool7_CBE_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool7_EERA_R4_CBE_Shura_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool8_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool8_EERA_R4_CBE_Class_Level_Tool_", Sys.Date(),".xlsx"))
-write.xlsx(clean_data.tool9_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool9_EERA_R4_CBE_IP_Level_Tool_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool7_CBE_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool7_EERA_R5_CBE_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool8_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool8_EERA_R5_CBE_", Sys.Date(),".xlsx"))
+write.xlsx(clean_data.tool9_for_client, paste0(output_data_path, "cleaned_dfs/sterilized/labeled/Tool9_EERA_R5_CBE_", Sys.Date(),".xlsx"))
 
 
 # source("./R/sample_dfs.R")
@@ -178,17 +178,17 @@ if (nrow(missing_translations) > 0){
   write.xlsx(missing_translations, paste0(output_data_path, "issues/translation_missing/missing_translations_", Sys.Date(),".xlsx"))
 }
 
-# if (nrow(Logic_check_result) > 0){
-#   write.xlsx(Logic_check_result, paste0(output_data_path, "issues/logic_checks/logic_checks_", Sys.Date(),".xlsx"))
-# }
-# 
-# if (nrow(logic_check_data_entry_final) > 0){
-#   write.xlsx(logic_check_data_entry_final, paste0(output_data_path, "issues/logic_checks/logic_checks_Data_Entry_", Sys.Date(),".xlsx"))
-# }
+if (nrow(Logic_check_result) > 0){
+   write.xlsx(Logic_check_result, paste0(output_data_path, "issues/logic_checks/logic_checks_", Sys.Date(),".xlsx"))
+}
 
-# if (nrow(calculate_issues) > 0){
-#   write.xlsx(calculate_issues, paste0(output_data_path, "issues/calculate_issues/calculate_issues_", Sys.Date(),".xlsx"))
-# }
+if (nrow(logic_check_data_entry_final) > 0){
+ write.xlsx(logic_check_data_entry_final, paste0(output_data_path, "issues/logic_checks/logic_checks_Data_Entry_", Sys.Date(),".xlsx"))
+}
+
+if (nrow(calculate_issues) > 0){
+  write.xlsx(calculate_issues, paste0(output_data_path, "issues/calculate_issues/calculate_issues_", Sys.Date(),".xlsx"))
+}
 
 if (nrow(outlier_check_result) > 0){
   write.xlsx(outlier_check_result, paste0(output_data_path, "issues/outliers/outlier_check_result_", Sys.Date(),".xlsx"))
