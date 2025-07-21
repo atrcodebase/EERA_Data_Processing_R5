@@ -275,12 +275,12 @@ clean_data.tool8_for_client$data <- clean_data.tool8_for_client$data |>
       TRUE ~ N4
     ),
     
-    P4 = as.character(P4),
-    P4 = case_when(
-      P4 == "9999" ~ "Don't wish to respond",
-      P4 == "8888" ~ "I don't know",
-      TRUE ~ P4
-    ),
+    # P4 = as.character(P4),
+    # P4 = case_when(
+    #   P4 == "9999" ~ "Don't wish to respond",
+    #   P4 == "8888" ~ "I don't know",
+    #   TRUE ~ P4
+    # ),
     
     R4 = as.character(R4),
     R4 = case_when(
