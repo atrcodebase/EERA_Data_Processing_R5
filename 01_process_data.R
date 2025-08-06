@@ -17,8 +17,8 @@ if(!require(atRfunctions)) remotes::install_github("atrcodebase/atRfunctions")
 Coalesce = function(var) ifelse(is.na(var), 0, var)
 
 # Declaring Global Variables ---------------------------------------------------
-data_collection_start_date_ps = as.Date("22.06.2025", format("%d.%m.%Y")) # Confirm with QAT
-data_collection_start_date_cbe = as.Date("22.06.2025", format("%d.%m.%Y")) # Confirm with QAT
+data_collection_start_date_ps = as.Date("03.08.2025", format("%d.%m.%Y")) # Confirm with QAT
+data_collection_start_date_cbe = as.Date("03.08.2025", format("%d.%m.%Y")) # Confirm with QAT
 # data_collection_end_date = as.Date("16.05.2024",  format("%d.%m.%Y"))
 qa_sheet_url_ps = "https://docs.google.com/spreadsheets/d/1MlXlnX3QEnbgV72p_yCtslHs9EHo3IrcZABlXM9lpbI/edit?gid=151674915#gid=151674915"
 # qa_remarks_url = "https://docs.google.com/spreadsheets/d/1aCjwYFRctOIbgfCLrf2cFXXYmCd_JhSaGmajl5srcz8/edit?gid=1487655797#gid=1487655797"
@@ -36,6 +36,8 @@ relevancy_files_path = list.files("input/relevancy_files/", full.names = T) %>% 
 meta_cols <- c("Site_Visit_ID", "EMIS_School_ID_CBE_KEY", "School_CBE_Name", "IP_Name", "Region", "Province", "District", "Area_Type", "Type_Of_School_CBE_Based_On_The_Sample", "School_CBE_Gender_Based_On_The_Sample", "School_Type_SV", "School_Gender_SV")
 meta_cols.qa_sheet <- c(Visit_ID = "Site_Visit_ID", "School Code", "Sample_Type", Survey_Date = "SubmissionDate", Region = "Region", "KEY")
 
+aug_dcd <- as.POSIXct("2025-08-01", format = "%Y-%m-%d", tz = "UTC")
+
 # Read inputs ------------------------------------------------------------------
 # Data sets
 raw_data.tool0 = read_xlsx_sheets(raw_data_path$tool0)
@@ -50,6 +52,7 @@ raw_data.tool7 = read_xlsx_sheets(raw_data_path$tool7)
 raw_data.tool8 = read_xlsx_sheets(raw_data_path$tool8)
 raw_data.tool9 = read_xlsx_sheets(raw_data_path$tool9)
 
+source("./R/filter_data_to_month.R")
 
 # Tools
 kobo_tool.tool0 = read_xlsx_sheets(kobo_tools_path$tool0)
