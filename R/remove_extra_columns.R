@@ -12,6 +12,7 @@ extra_cols.tool9 <- c(
   'ID_Check', 'TPMA_Location_Name', 'Entity_Type',	'acknowledge', 'qa_log_status', 'AA_Full',# NEW
   'indx', 'CBE_Province',	'CBE_Province_DariPashto', 'CBE_Province_Pcode', 'CBE_District_DariPashto',	'CBE_District_Pcode',#NEW
   'CBE_Province_Climate',	'CBE_Village',	'CBE_Village_DariPashto', 'CBE_School_CBE_Name_DariPashto', 'D1_Hub_School_Name',
+  'C2_CBE_Name',
   
   
   
@@ -57,6 +58,13 @@ extra_cols.tool8 <- c(
   'indx4', 'indx5', 'Y_indx1', 'qa_log_status', 'AA_Full', 'AA_Closure_Interview', 'AA_CBE_Open', 'AA_TLM', 'O10_0_not_in_use', 'Q10_0_not_in_use', 'S10_0_not_in_use',# NEW 
   "S10_0_not_in_use.re_calc", 'Q10_0_not_in_use.re_calc',
   "B2", 'D12_Hub_School_Name',
+  'Passcode_correct[1]/Valid_User[1]/Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Available',
+  'Passcode_correct[1]/Valid_User[1]/Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Photo1_QA',
+  'Passcode_correct[1]/Valid_User[1]/Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Photo2_QA',
+  'Passcode_correct[1]/Valid_User[1]/Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Photo3_QA',
+  'Passcode_correct[1]/Valid_User[1]/Section_3_Receipt_and_Use_of_TLM[1]/B_Teacher_Kit[1]/integer',
+  'indx6',
+  
   
   # PII 
   "C2", "Respondent_Phone_Number1", "Respondent_Phone_Number2", "Respondent_Full_Name", "Respondent1_Phone_Number", "Respondent2_Phone_Number", "E18",
@@ -76,7 +84,8 @@ extra_cols.tool8 <- c(
   "O10_Caption", "Q7_Photo_Caption", "Q10_Photo_Caption", "S7_Caption", "S10_Caption",  "W15_Caption",  "W18_Caption",  "W21_Caption",  "X6_Caption",  "Please_Add_Any_Relevant_Photo_caption",
   'B5_2_Caption', 'O10_Not_In_Use_Caption', 'S10_Not_In_Use_Caption', 'Q10_Caption', 'Q10_Not_In_Use_Caption',# NEW
   "Kitab_Jinsi_Or_Distribution_Ticket_Photo_Caption", "TLM_Distribution_List_Photo1_Caption", "TLM_Distribution_List_Photo2_Caption", "TLM_Distribution_List_Photo3_Caption", #NEW
-  'Stock_Card_Photo1_Caption', 'Stock_Card_Photo2_Caption', 'Stock_Card_Photo3_Caption', #NEW
+  'Stock_Card_Photo1_Caption', 'Stock_Card_Photo2_Caption', 'Stock_Card_Photo3_Caption', #NEW,
+  'AA_TLM_CLASSROOM_MATERIALS', 'AA_TLM_Teacher_Kit', 'AA_TLM_Student_Kit',
   
   # Notes and Re-coded
   "Sample_Type", "Headcount_Total_Students.re_calc", 'O10_0_not_in_use.re_calc',
@@ -88,8 +97,8 @@ extra_cols.tool8 <- c(
   "Subjects_Added_count",	"SET-OF-Subjects_Added", "SET-OF-Relevant_photos", 'Count_Classes', 'Count_Adults_At_The_CBE', 'Count_Section_2_2_3_Attendance_Record_Check_CBS',
   'Count_Section_2_2_4_Headcount', 'Count_Section_2_4_Student_Ages', 'Count_Classroom_Materials', 'O10_0_not_in_use_total', 'Count_Teacher_Kit',	'Q10_0_not_in_use_total',
   'Count_Student_Kit',	'S10_0_not_in_use_total', 'Count_V_list_of_all_members', 'Count_Subjects_Added',
+  'N_Other_Training_count',	'SET-OF-N_Other_Training', 'SET-OF-N_Other_Training',
   
-
   
   # Surveyor Comments
   "Surveyor_Comments",	"Surveyor_Comments_Translation", "C13",	"C13_Translation",
@@ -153,7 +162,10 @@ extra_cols.tool6 <- c(
   "instanceID", "formdef_version",
   "ID_Check", 'Type_of_CBE',	'TPMA_Location_Name',	'Entity_Type', 'acknowledge',# NEW
   "indx1", 'qa_log_status', 'AA_Full',# NEW
-  'A2', 
+  'A2', 'movement_level',	'sound_level',	'sound_pitch',	'sound_conversation',
+  'Tazkira_ID_Available',	'Tazkira_ID_Photo',	'Tazkira_ID_Photo_QA',
+  
+
   
   
   # PII 
