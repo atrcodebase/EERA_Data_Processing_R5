@@ -88,10 +88,10 @@ qa_sheet = read_sheet(qa_sheet_url_ps, sheet = "QA_Log")
 2
 
 correction_log = read_sheet(qa_sheet_url_ps, sheet = "Correction _Log")
-correction_log <- correction_log %>% 
-  left_join(
-    qa_sheet %>% select(KEY_Unique, SubmissionDate), by = "KEY_Unique"
-  )
+# correction_log <- correction_log %>% 
+#   left_join(
+#     qa_sheet %>% select(KEY_Unique, SubmissionDate), by = "KEY_Unique"
+#   )
 correction_log <- correction_log %>% 
   filter(as.POSIXct(SubmissionDate, format = "%Y-%m-%d", tz = "UTC") >= aug_dcd)
 
@@ -231,10 +231,10 @@ deleted_keys_cbe = deletion_log |> filter(Sample_Type == "CBE") |> pull(KEY_Uniq
 
 # Detailed Check log -----------------------------------------------------------
 detailed_check_log <- read_sheet(qa_sheet_url_ps, sheet = "Detailed_Check")
-detailed_check_log <- detailed_check_log %>% 
-  left_join(
-    qa_sheet %>% select(KEY, SubmissionDate), by = c("KEY_Unique" = "KEY")
-  )
+# detailed_check_log <- detailed_check_log %>% 
+#   left_join(
+#     qa_sheet %>% select(KEY, SubmissionDate), by = c("KEY_Unique" = "KEY")
+#   )
 detailed_check_log <- detailed_check_log %>% 
   filter(as.POSIXct(SubmissionDate, format = "%Y-%m-%d", tz = "UTC") >= aug_dcd)
 
