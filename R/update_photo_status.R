@@ -23,6 +23,7 @@ form_names_cbe
 # Aligning New_Value of text in order to apply along with photo status -------------
 photo_status_ps <- photo_status_ps %>% 
   mutate(
+    New_Value = as.character(New_Value),
     New_Value = case_when(
       Check_Type == "image" ~ Check_Status,
       TRUE ~ New_Value
