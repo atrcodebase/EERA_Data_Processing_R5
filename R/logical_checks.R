@@ -3163,7 +3163,7 @@ lc_grades_received_kits_and_operational_grades <- plyr::rbind.fill(
   
   # Grade 2
   grades_received_kits_and_operational_grades |>
-    filter(J6_Grades_1 == 1 & opt_grade_2 == 1) |>
+    filter(J6_Grades_2 == 1 & opt_grade_2 == 1) |>
     mutate(
       Issue = "Grade 2 is selected as the Grade for which the Students have received the Students Kits, but the in School_Operationlity sheet the Grade is reported as a non-operational Grade!",
       Question = "J6_Grades",
@@ -3838,8 +3838,8 @@ lc_grades_received_kits_and_operational_grades <- plyr::rbind.fill(
       KEY,
       Issue
     )
-  
-)
+) %>% 
+  mutate(tool = "Tool 2 - Light", sheet = "data", Old_value = as.character(Old_value))
 
 # Logging issues in Tool 3 ------------------------------------------------
 lc_tool3 <- plyr::rbind.fill(
