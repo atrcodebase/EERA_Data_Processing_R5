@@ -336,7 +336,18 @@ extra_cols.tool2 <- c(
   "Village", "instanceID", "formdef_version",
   "ID_Check", "TPMA_Location_Name","Entity_Type",	"acknowledge", #NEW
   'qa_log_status', 'AA_Full', 'AA_Closure_Interview', 'indx3', 'AA_TLM',# NEW
-  'IP_Name', 'B2', 'District_SV',
+  'IP_Name', 'B2', 'District_SV', 
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Public_Stationary_Kit[1]/H6_Grades',
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Kitab_Jinsi_Or_Distribution_Ticket_Photo2_QA',
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Available',
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Photo1_QA',
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Photo2_QA',
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Photo3_QA',
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Kitab_Jinsi_Or_Distribution_Ticket_Photo2',
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Photo1',
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Photo2',
+  'Passcode_correct[1]/Valid_User[1]/H_Section_3_Receipt_and_Use_of_TLM[1]/Stock_Card_Photo3',
+  
   
   
   # PII 
