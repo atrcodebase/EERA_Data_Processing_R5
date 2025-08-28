@@ -371,6 +371,7 @@ repeat_sheet_issues <- rbind(
   
   # Tool 5
   # 1 - Does not have repeat count in the tool - note (<b>Please go to previous page and take at least two photos of toilets under construction.)
+  rbind(
   clean_data.tool5$data |>
     mutate(supposed_row_count = 2) |>
     filter(C5 == 4) |>
@@ -450,7 +451,7 @@ repeat_sheet_issues <- rbind(
       sheet_name,
       Row_count_column_name,
       Row_count_from_tab
-    ) |> 
+    )) |> 
     mutate(tool = "Tool 5 - WASH", Sample_Type = "Public School"),
   
   # Tool 6
